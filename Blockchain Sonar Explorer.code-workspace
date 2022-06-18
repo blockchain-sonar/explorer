@@ -14,5 +14,8 @@
 			"path": "."
 		},
 	],
-	"settings": {}
+	"settings": {
+		"files.autoSave": "afterDelay",
+		"files.autoSaveDelay": 3000
+	}
 }

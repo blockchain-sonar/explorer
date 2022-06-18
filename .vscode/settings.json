@@ -3,5 +3,7 @@
 		"**/backend": true,
 		"**/docs": true,
 		"**/frontend": true,
-	}
+	},
+	"files.autoSave": "afterDelay",
+	"files.autoSaveDelay": 3000
 }
