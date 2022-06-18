@@ -29,6 +29,7 @@ jobs:
         run: |
           export PYTHONPATH="${PWD};${PYTHONPATH}"
           python -c "import sys;print(sys.path)"
+          mkdir junit
           python -m xmlrunner discover --output-file junit/test-results.xml -v
 #          pip install pytest
 #          pip install pytest-cov
