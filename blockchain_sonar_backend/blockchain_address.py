@@ -1,7 +1,15 @@
 from __future__ import annotations
-from audioop import add
-
+from typing import Optional
 import re
+
+class UnparsabeBlockchainAddressException(Exception):
+	def __init__(self, address: str):
+		super().__init__("Unable to parse blockchain address '%s'" % address)
+		self._address = address
+	
+	@property
+	def address(self) -> str:
+		return self._address
 
 class BlockchainAddress(object):
 	"""
@@ -19,13 +27,16 @@ class BlockchainAddress(object):
 	"""
 
 	@classmethod
-	def parse(cls, address: str) -> BlockchainAddress:
-		if BlockchainAddress._isBitcoin(address):
-			return BitcoinBlockchainAddress.parse(address)
-		elif BlockchainAddress._isEip55(address):
-			return Eip55BlockchainAddress.parse(address)
-		else:
-			raise Exception("Unsupported address: %s" % address)
+	def parse(cls, address: str) -> list[BlockchainAddress]:
+		ethereum_address = EthereumBlockchainAddress.try_parse(address)
+		if ethereum_address is not None:
+			return [ethereum_address]
+
+		bitcoin_address = BitcoinBlockchainAddress.try_parse(address)
+		if bitcoin_address is not None:
+			return [bitcoin_address]
+	
+		raise UnparsabeBlockchainAddressException(address)
 
 	def __init__(self, data: bytes) -> None:
 		self._data = bytes(data)
@@ -34,26 +45,23 @@ class BlockchainAddress(object):
 	def data(self):
 		return self._data
 
-	@staticmethod
-	def _isBitcoin(address: str) -> bool:
-		# TODO
-		return False
-
-	@staticmethod
-	def _isEip55(address: str) -> bool:
-		if Eip55BlockchainAddress.get_validation_regex().match(address):
-			return True
-		return False
-
 class BitcoinBlockchainAddress(BlockchainAddress):
 	"""
-	A class to represent an Bitcoin (Legacy) Address.
-	See ???
+	A class represents an Bitcoin Address.
+
+	Supported BIPs:
+	- TBD1
+	- TBD2
 
 	Static Methods
 	-------
 	parse(address: str) -> BitcoinBlockchainAddress:
 		Parse a string representation of an address to specific `BitcoinBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+
+	try_parse(address: str) -> Optional[BitcoinBlockchainAddress]:
+		Parse a string representation of an address to specific `BitcoinBlockchainAddress`.
+		Returns `None` if address is not parsable.
 
 	Properties
 	----------
@@ -61,24 +69,99 @@ class BitcoinBlockchainAddress(BlockchainAddress):
 		raw representation of address (in bytes)
 	"""
 
-	@staticmethod
-	def parse(address: str) -> BitcoinBlockchainAddress:
-		raise Exception("Not implelented yet")
+	@classmethod
+	def parse(cls, address: str) -> BitcoinBlockchainAddress:
+		"""
+		Parse a string representation of an address to specific `BitcoinBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+		"""
+		blockchain_address: Optional[BitcoinBlockchainAddress] = cls.try_parse(address)
+		if blockchain_address is not None:
+			return blockchain_address
+		raise UnparsabeBlockchainAddressException(address)
+
+	@classmethod
+	def try_parse(cls, address: str) -> Optional[BitcoinBlockchainAddress]:
+		"""
+		Parse a string representation of an address to specific `BitcoinBlockchainAddress`.
+		Returns `None` if address is not parsable.
+		"""
+		raise Exception("Not impelented yet")
 
 	def __init__(self, data: bytes) -> None:
 		# if len(data) != ???:
 		# 	raise Exception("Wrong data for address")
 		super().__init__(data)
 
-class Eip55BlockchainAddress(BlockchainAddress):
+class BitcoincashBlockchainAddress(BlockchainAddress):
 	"""
-	A class represents EIP-55: Mixed-case checksum address encoding.
-	See https://eips.ethereum.org/EIPS/eip-55
+	A class represents an BitcoinCash Address.
+
+	Supported BIPs:
+	- TBD1
+	- TBD2
 
 	Static Methods
 	-------
-	parse(address: str) -> Eip55BlockchainAddress:
-		Parse a string representation of an address to specific `Eip55BlockchainAddress`
+	parse(address: str) -> BitcoincashBlockchainAddress:
+		Parse a string representation of an address to specific `BitcoincashBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+
+	try_parse(address: str) -> Optional[BitcoincashBlockchainAddress]:
+		Parse a string representation of an address to specific `BitcoincashBlockchainAddress`.
+		Returns `None` if address is not parsable.
+
+	Properties
+	----------
+	data: bytes
+		raw representation of address (in bytes)
+
+	References
+	----------
+	- https://bitcoin.stackexchange.com/questions/69056/bitcoin-cash-cash-address-format
+	"""
+
+	@classmethod
+	def parse(cls, address: str) -> BitcoincashBlockchainAddress:
+		"""
+		Parse a string representation of an address to specific `BitcoincashBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+		"""
+		blockchain_address: Optional[BitcoincashBlockchainAddress] = cls.try_parse(address)
+		if blockchain_address is not None:
+			return blockchain_address
+		raise UnparsabeBlockchainAddressException(address)
+
+	@classmethod
+	def try_parse(cls, address: str) -> Optional[BitcoincashBlockchainAddress]:
+		"""
+		Parse a string representation of an address to specific `BitcoincashBlockchainAddress`.
+		Returns `None` if address is not parsable.
+		"""
+		raise Exception("Not impelented yet")
+
+	def __init__(self, data: bytes) -> None:
+		# if len(data) != ???:
+		# 	raise Exception("Wrong data for address")
+		super().__init__(data)
+
+class EthereumBlockchainAddress(BlockchainAddress):
+	"""
+	A class represents an Ethereum Address.
+
+	Supported EIPs:
+	- Legacy Ethereum address described in the [Whitepaper](https://ethereum.org/en/whitepaper/)
+	- [EIP-55](https://eips.ethereum.org/EIPS/eip-55): Mixed-case checksum address encoding.
+
+	Static Methods
+	-------
+	parse(address: str) -> EthereumBlockchainAddress:
+		Parse a string representation of an address to specific `EthereumBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+
+	try_parse(address: str) -> Optional[EthereumBlockchainAddress]:
+		Parse a string representation of an address to specific `EthereumBlockchainAddress`.
+		Returns `None` if address is not parsable.
 
 	Properties
 	----------
@@ -87,58 +170,54 @@ class Eip55BlockchainAddress(BlockchainAddress):
 	"""
 
 	@classmethod
-	def parse(cls, blockchain_address: str) -> Eip55BlockchainAddress:
-		if cls._validation_regex_legacy.match(blockchain_address):
-			pass
-		else:
-			# TODO validate address by EIP-55 https://eips.ethereum.org/EIPS/eip-55
-			pass
-
-		address_data_str: str = blockchain_address[2:]
-		address_data: bytes = bytes.fromhex(address_data_str)
-		blockchain_address: Eip55BlockchainAddress = Eip55BlockchainAddress(address_data)
-		return blockchain_address
+	def parse(cls, address: str) -> EthereumBlockchainAddress:
+		"""
+		Parse a string representation of an address to specific `EthereumBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+		"""
+		blockchain_address: Optional[EthereumBlockchainAddress] = cls.try_parse(address)
+		if blockchain_address is not None:
+			return blockchain_address
+		raise UnparsabeBlockchainAddressException(address)
 
 	@classmethod
-	def get_validation_regex(cls) -> re.Pattern:
-		return cls._validation_regex
+	def try_parse(cls, address: str) -> Optional[EthereumBlockchainAddress]:
+		"""
+		Parse a string representation of an address to specific `EthereumBlockchainAddress`.
+		Returns `None` if address is not parsable.
+		"""
+		if cls._validation_regex_legacy.match(address):
+			address_data_str: str = address[2:]
+			address_data: bytes = bytes.fromhex(address_data_str)
+			blockchain_address: EthereumBlockchainAddress = EthereumBlockchainAddress(address_data)
+			return blockchain_address
+		else:
+			# TODO validate address by EIP-55 https://eips.ethereum.org/EIPS/eip-55
+			raise Exception("Not impelented yet")
 
 	_validation_regex_legacy = re.compile(r"^0x[0-9a-f]{40}$")
-	_validation_regex = re.compile(r"^0x[0-9a-fA-F]{40}$")
+	_validation_regex_eip55 = re.compile(r"^0x[0-9a-fA-F]{40}$")
 
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def to_legacy_address(self) -> str:
+	def as_legacy_address(self) -> str:
 		address_data_str: str = self._data.hex()
 		return "0x%s" % address_data_str
 
-	def to_eip55_address(self) -> str:
+	def as_eip55_address(self) -> str:
 		# See https://eips.ethereum.org/EIPS/eip-55
 		raise Exception("Not implemented")
+
 
 #
 # To future implementation
 #
-# class Eip3770BlockchainAddress(Eip55BlockchainAddress):
+# class Eip3770BlockchainAddress(EthereumBlockchainAddress):
 # 	"""
 # 	A class represents EIP-3770: Chain-specific addresses.
 # 	See https://eips.ethereum.org/EIPS/eip-3770
-
-# 	Static Methods
-# 	-------
-# 	parse(address: str) -> Eip55BlockchainAddress:
-# 		Parse a string representation of an address to specific `Eip55BlockchainAddress`
-
-# 	Properties
-# 	----------
-# 	data: bytes
-# 		raw representation of address (in bytes)
 # 	"""
-
-# 	@classmethod
-# 	def parse(address: str) -> Eip55BlockchainAddress:
-# 		raise Exception("Not implemented yet")
-
+#
 # 	def __init__(self, data: bytes) -> None:
 # 		super().__init__(data)
