@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Optional
 import re
+import eth_utils
 
 class UnparsabeBlockchainAddressException(Exception):
 	def __init__(self, address: str):
@@ -207,8 +208,26 @@ class EthereumBlockchainAddress(BlockchainAddress):
 
 	def as_eip55_address(self) -> str:
 		# See https://eips.ethereum.org/EIPS/eip-55
-		raise Exception("Not implemented")
+		
+		hex_address = self._data.hex()
+		checksummed_buffer = ""
+		hashed_address = eth_utils.keccak(text=hex_address).hex()
+		for nibble_index, character in enumerate(hex_address):
+			if character in "0123456789":
+				checksummed_buffer += character
+			elif character in "abcdef" or "ABCDEF":
+				hashed_address_nibble = int(hashed_address[nibble_index], 16)
 
+				if hashed_address_nibble > 7:
+					checksummed_buffer += character.upper()
+				else:
+					checksummed_buffer += character
+			else:
+				raise eth_utils.ValidationError(
+						f"Unrecognized hex character {character!r} at position {nibble_index}"
+						)
+		address_data_str = "0x%s" % checksummed_buffer
+		return address_data_str 
 
 #
 # To future implementation
