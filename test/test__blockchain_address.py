@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from blockchain_sonar_backend.blockchain_address import BitcoincashBlockchainAddress, BlockchainAddress, BitcoinBlockchainAddress, EthereumBlockchainAddress
+from blockchain_sonar_backend.blockchain_address import BitcoincashBlockchainAddress, BlockchainAddress, BitcoinBlockchainAddress, EthereumBlockchainAddress,DogecoinBlockchainAddress
 from blockchain_sonar_backend.utils.collections import filter_type_single, filter_type_single_or_none
 
 
@@ -85,3 +85,20 @@ class TestBlockchainAddress(TestCase):
 
 		reverse_eip55_address: str = ethereum_blockchain_address.as_eip55_address()
 		self.assertEqual(reverse_eip55_address, "0xd3CdA913deB6f67967B99D67aCDFa1712C293601")
+
+	def test__address_resolve__dogecoin_as_dogecoin_address(self):
+		"""
+		In the test we parse Dogecoin format address "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k"
+		and trying to represent it as_dogecoin_address
+		"""
+		blockchain_addresses = BlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
+		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should not return None")
+		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should return list")
+		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should return list with single element")
+	
+		ethereum_blockchain_address = filter_type_single_or_none(DogecoinBlockchainAddress, blockchain_addresses)
+		self.assertIsNotNone(ethereum_blockchain_address, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should represent DogecoinBlockchainAddress")
+
+		reverse_dogecoin_address: str = ethereum_blockchain_address.dogecoin_address()
+		self.assertEqual(reverse_dogecoin_address, "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
+
