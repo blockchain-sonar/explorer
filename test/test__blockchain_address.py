@@ -96,9 +96,9 @@ class TestBlockchainAddress(TestCase):
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should return list with single element")
 	
-		ethereum_blockchain_address = filter_type_single_or_none(DogecoinBlockchainAddress, blockchain_addresses)
-		self.assertIsNotNone(ethereum_blockchain_address, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should represent DogecoinBlockchainAddress")
+		dogecoin_blockchain_address = filter_type_single_or_none(DogecoinBlockchainAddress, blockchain_addresses)
+		self.assertIsNotNone(dogecoin_blockchain_address, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should represent DogecoinBlockchainAddress")
 
-		reverse_dogecoin_address: str = ethereum_blockchain_address.dogecoin_address()
+		reverse_dogecoin_address: str = dogecoin_blockchain_address.dogecoin_address()
 		self.assertEqual(reverse_dogecoin_address, "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
 
