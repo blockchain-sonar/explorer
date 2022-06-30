@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Optional
 import re
 import eth_utils
+import base58
 
 class UnparsabeBlockchainAddressException(Exception):
 	def __init__(self, address: str):
@@ -32,14 +33,14 @@ class BlockchainAddress(object):
 		ethereum_address = EthereumBlockchainAddress.try_parse(address)
 		if ethereum_address is not None:
 			return [ethereum_address]
-
-		bitcoin_address = BitcoinBlockchainAddress.try_parse(address)
-		if bitcoin_address is not None:
-			return [bitcoin_address]
 		
 		dogecoin_address = DogecoinBlockchainAddress.try_parse(address)
 		if dogecoin_address is not None:
 			return [dogecoin_address]
+
+		bitcoin_address = BitcoinBlockchainAddress.try_parse(address)
+		if bitcoin_address is not None:
+			return [bitcoin_address]
 	
 		raise UnparsabeBlockchainAddressException(address)
 
@@ -265,9 +266,10 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 		Parse a string representation of an address to specific `DogecoinBlockchainAddress`.
 		Returns `None` if address is not parsable.
 		"""
-		_validation_regex_Dogecoin= re.compile(r"^D[0-9a-zA-Z]{34}$")
+		_validation_regex_Dogecoin= re.compile(r"^D[0-9a-zA-Z]{25-34}$")
 		if _validation_regex_Dogecoin.match(address):
-			address_data: bytes = bytes.fromhex(address)
+			address_data: bytes = base58.b58encode(address)
+
 			blockchain_address: DogecoinBlockchainAddress = DogecoinBlockchainAddress(address_data)
 			return blockchain_address
 		else:
@@ -277,5 +279,6 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 		super().__init__(data)
 
 	def as_legacy_address_dogecoin(self) -> str:
-		address_data_str: str = self._data.hex()
+		address_data_decode: bytes = base58.b58decode(self._data)
+		address_data_str: str = str(address_data_decode, 'UTF-8')
 		return address_data_str
