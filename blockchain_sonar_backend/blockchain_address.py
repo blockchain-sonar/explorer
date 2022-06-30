@@ -266,19 +266,21 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 		Parse a string representation of an address to specific `DogecoinBlockchainAddress`.
 		Returns `None` if address is not parsable.
 		"""
-		_validation_regex_Dogecoin= re.compile(r"^D[0-9a-zA-Z]{25-34}$")
-		if _validation_regex_Dogecoin.match(address):
-			address_data: bytes = base58.b58encode(address)
+		
+		if cls._validation_regex_Dogecoin.match(address):
+			address_data_decode: bytes = base58.b58decode(address)
 
-			blockchain_address: DogecoinBlockchainAddress = DogecoinBlockchainAddress(address_data)
+			blockchain_address: DogecoinBlockchainAddress = DogecoinBlockchainAddress(address_data_decode)
 			return blockchain_address
 		else:
 			raise Exception("Wrong address data")
+
+	_validation_regex_Dogecoin= re.compile(r"^D[0-9a-zA-Z]{33}$")
 
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
 	def as_legacy_address_dogecoin(self) -> str:
-		address_data_decode: bytes = base58.b58decode(self._data)
-		address_data_str: str = str(address_data_decode, 'UTF-8')
+		address_data_encode: bytes = base58.b58encode(self._data)
+		address_data_str: str = str(address_data_encode, 'UTF-8')
 		return address_data_str
