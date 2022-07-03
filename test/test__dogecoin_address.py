@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from blockchain_sonar_backend.blockchain_address import DogecoinBlockchainAddress
+from blockchain_sonar_backend.blockchain_address import DogecoinBlockchainAddress,BlockchainAddress
 
 class TestDogecoinAddress(TestCase):
 	def test__dogecoin_address_should_be_25_bytes(self):
@@ -46,3 +46,7 @@ class TestDogecoinAddress(TestCase):
 		address: DogecoinBlockchainAddress = DogecoinBlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
 		chek_address = address.as_legacy_address_dogecoin()
 		self.assertEqual(chek_address, "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
+
+	def test__dogecoin_fake_address(self):
+		address: DogecoinBlockchainAddress != DogecoinBlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
+		self.assertEqual(address, None, "DogecoinBlockchainAddress should return None")

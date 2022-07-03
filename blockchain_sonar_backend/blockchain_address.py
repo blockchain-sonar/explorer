@@ -33,14 +33,20 @@ class BlockchainAddress(object):
 		ethereum_address = EthereumBlockchainAddress.try_parse(address)
 		if ethereum_address is not None:
 			return [ethereum_address]
+		elif ethereum_address != address:
+			return None
 		
 		dogecoin_address = DogecoinBlockchainAddress.try_parse(address)
 		if dogecoin_address is not None:
 			return [dogecoin_address]
+		elif dogecoin_address != address:
+			return None
 
 		bitcoin_address = BitcoinBlockchainAddress.try_parse(address)
 		if bitcoin_address is not None:
 			return [bitcoin_address]
+		elif bitcoin_address != address:
+			return None
 	
 		raise UnparsabeBlockchainAddressException(address)
 
