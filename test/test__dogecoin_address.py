@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from blockchain_sonar_backend.blockchain_address import DogecoinBlockchainAddress,BlockchainAddress
+from blockchain_sonar_backend.blockchain_address import DogecoinBlockchainAddress,Optional
 
 class TestDogecoinAddress(TestCase):
 	def test__dogecoin_address_should_be_25_bytes(self):
@@ -44,9 +44,18 @@ class TestDogecoinAddress(TestCase):
 	
 	def test__dogecoin_address_check_as_legacy(self):
 		address: DogecoinBlockchainAddress = DogecoinBlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
-		chek_address = address.as_legacy_address_dogecoin()
+		chek_address = address.as_address()
 		self.assertEqual(chek_address, "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
 
-	def test__dogecoin_fake_address(self):
-		address: DogecoinBlockchainAddress != DogecoinBlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
-		self.assertEqual(address, None, "DogecoinBlockchainAddress should return None")
+	def test__dogecoin_fake_address_try_parse(self):
+		address: Optional[DogecoinBlockchainAddress] = DogecoinBlockchainAddress.try_parse("1")
+		self.assertIsNone(address, "DogecoinBlockchainAddress should return None")
+
+	def test__dogecoin_fake_address_parse(self):
+		try:
+			address: DogecoinBlockchainAddress = DogecoinBlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
+		except Exception as e:
+			# TODO check for correct data address in e
+			return
+		self.assertRaises(Exception)
+		#self.fail("The method 'parse' returned Exception.")

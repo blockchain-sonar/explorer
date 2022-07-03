@@ -33,21 +33,15 @@ class BlockchainAddress(object):
 		ethereum_address = EthereumBlockchainAddress.try_parse(address)
 		if ethereum_address is not None:
 			return [ethereum_address]
-		elif ethereum_address != address:
-			return None
-		
+
 		dogecoin_address = DogecoinBlockchainAddress.try_parse(address)
 		if dogecoin_address is not None:
 			return [dogecoin_address]
-		elif dogecoin_address != address:
-			return None
 
 		bitcoin_address = BitcoinBlockchainAddress.try_parse(address)
 		if bitcoin_address is not None:
 			return [bitcoin_address]
-		elif bitcoin_address != address:
-			return None
-	
+		
 		raise UnparsabeBlockchainAddressException(address)
 
 	def __init__(self, data: bytes) -> None:
@@ -205,7 +199,7 @@ class EthereumBlockchainAddress(BlockchainAddress):
 			return blockchain_address
 		else:
 			# TODO validate address by EIP-55 https://eips.ethereum.org/EIPS/eip-55
-			raise Exception("Not impelented yet")
+			raise Exception("Not implemented yet")
 
 	_validation_regex_legacy = re.compile(r"^0x[0-9a-f]{40}$")
 	_validation_regex_eip55 = re.compile(r"^0x[0-9a-fA-F]{40}$")
@@ -253,6 +247,29 @@ class EthereumBlockchainAddress(BlockchainAddress):
 # 		super().__init__(data)
 
 class DogecoinBlockchainAddress(BlockchainAddress):
+	"""
+	A class represents an Dogecoin Address.
+
+	Static Methods
+	-------
+	parse(address: str) -> DogecoinBlockchainAddress:
+		Parse a string representation of an address to specific `DogecoinBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+
+	try_parse(address: str) -> Optional[DogecoinBlockchainAddress]:
+		Parse a string representation of an address to specific `DogecoinBlockchainAddress`.
+		Returns `None` if address is not parsable.
+
+	Properties
+	----------
+	data: bytes
+		raw representation of address (in bytes)
+	
+	References
+	----------
+	https://support.ledger.com/hc/ru/articles/115005174025-Dogecoin-DOGE-?docs=true
+	https://ru.wikipedia.org/wiki/Dogecoin
+	"""
 
 	@classmethod
 	def parse(cls, address: str) -> DogecoinBlockchainAddress:
@@ -263,7 +280,8 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 		blockchain_address: Optional[DogecoinBlockchainAddress] = cls.try_parse(address)
 		if blockchain_address is not None:
 			return blockchain_address
-		raise UnparsabeBlockchainAddressException(address)
+		else:
+			raise UnparsabeBlockchainAddressException(address)
 
 	@classmethod
 	def try_parse(cls, address: str) -> Optional[DogecoinBlockchainAddress]:
@@ -279,14 +297,14 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 			blockchain_address: DogecoinBlockchainAddress = DogecoinBlockchainAddress(address_data_decode)
 			return blockchain_address
 		else:
-			raise Exception("Wrong address data")
+			return None
 
 	_validation_regex_Dogecoin= re.compile(r"^D[0-9a-zA-Z]{33}$")
 
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def as_legacy_address_dogecoin(self) -> str:
+	def as_address(self) -> str:
 		address_data_encode: bytes = base58.b58encode(self._data)
 		address_data_str: str = str(address_data_encode, 'UTF-8')
 		return address_data_str
