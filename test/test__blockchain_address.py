@@ -99,6 +99,6 @@ class TestBlockchainAddress(TestCase):
 		dogecoin_blockchain_address = filter_type_single_or_none(DogecoinBlockchainAddress, blockchain_addresses)
 		self.assertIsNotNone(dogecoin_blockchain_address, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should represent DogecoinBlockchainAddress")
 
-		reverse_dogecoin_address: str = dogecoin_blockchain_address.dogecoin_address()
+		reverse_dogecoin_address: str = dogecoin_blockchain_address.as_address()
 		self.assertEqual (reverse_dogecoin_address, "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
 
