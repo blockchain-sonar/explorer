@@ -53,9 +53,8 @@ class TestDogecoinAddress(TestCase):
 
 	def test__dogecoin_fake_address_parse(self):
 		try:
-			address: DogecoinBlockchainAddress = DogecoinBlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
+			address: DogecoinBlockchainAddress = DogecoinBlockchainAddress.parse("1")
 		except Exception as e:
 			# TODO check for correct data address in e
 			return
-		self.assertRaises(Exception)
-		#self.fail("The method 'parse' returned Exception.")
+		self.fail("The method 'parse' returned Exception.")
