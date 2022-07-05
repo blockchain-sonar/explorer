@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from blockchain_sonar_backend.blockchain_address import BitcoincashBlockchainAddress, BlockchainAddress, BitcoinBlockchainAddress, EthereumBlockchainAddress,DogecoinBlockchainAddress
+from blockchain_sonar_backend.blockchain_address import BitcoincashBlockchainAddress, BlockchainAddress, BitcoinBlockchainAddress, EthereumBlockchainAddress,DogecoinBlockchainAddress, LitecoinBlockchainAddress
 from blockchain_sonar_backend.utils.collections import filter_type_single, filter_type_single_or_none
 
 
@@ -101,4 +101,20 @@ class TestBlockchainAddress(TestCase):
 
 		reverse_dogecoin_address: str = dogecoin_blockchain_address.as_address()
 		self.assertEqual (reverse_dogecoin_address, "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
+	
+	def test__address_resolve__litecoin_as_litecoin_address(self):
+		"""
+		In the test we parse Litecoin format address "LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW"
+		and trying to represent it as_litecoin_address
+		"""
+		blockchain_addresses = BlockchainAddress.parse("LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
+		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW') should not return None")
+		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW') should return list")
+		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW') should return list with single element")
+	
+		litecoin_blockchain_address = filter_type_single_or_none(LitecoinBlockchainAddress, blockchain_addresses)
+		self.assertIsNotNone(litecoin_blockchain_address, "BlockchainAddress.parse('LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW') should represent LitecoinBlockchainAddress")
+
+		reverse_litecoin_address: str = litecoin_blockchain_address.as_address()
+		self.assertEqual (reverse_litecoin_address, "LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
 

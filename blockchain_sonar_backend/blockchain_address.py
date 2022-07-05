@@ -37,6 +37,10 @@ class BlockchainAddress(object):
 		dogecoin_address = DogecoinBlockchainAddress.try_parse(address)
 		if dogecoin_address is not None:
 			return [dogecoin_address]
+		
+		litecoin_address = LitecoinBlockchainAddress.try_parse(address)
+		if litecoin_address is not None:
+			return [litecoin_address]
 
 		bitcoin_address = BitcoinBlockchainAddress.try_parse(address)
 		if bitcoin_address is not None:
@@ -241,14 +245,14 @@ class EthereumBlockchainAddress(BlockchainAddress):
 #
 # To future implementation
 #
-# class Eip3770BlockchainAddress(EthereumBlockchainAddress):
-# 	"""
-# 	A class represents EIP-3770: Chain-specific addresses.
-# 	See https://eips.ethereum.org/EIPS/eip-3770
-# 	"""
-#
-# 	def __init__(self, data: bytes) -> None:
-# 		super().__init__(data)
+#class Eip3770BlockchainAddress(EthereumBlockchainAddress):
+#	"""
+#	A class represents EIP-3770: Chain-specific addresses.
+#	See https://eips.ethereum.org/EIPS/eip-3770
+#	"""
+#	def __init__(self, data: bytes) -> None:
+#		super().__init__(data)
+
 
 class DogecoinBlockchainAddress(BlockchainAddress):
 	"""
@@ -297,13 +301,81 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 		
 		if cls._validation_regex_Dogecoin.match(address):
 			address_data_decode: bytes = base58.b58decode(address)
-
 			blockchain_address: DogecoinBlockchainAddress = DogecoinBlockchainAddress(address_data_decode)
 			return blockchain_address
 		else:
 			return None
 
-	_validation_regex_Dogecoin= re.compile(r"^D[0-9a-zA-Z]{33}$")
+	_validation_regex_Dogecoin= re.compile(r"^D[0-9a-zA-Z]{26,33}$")
+
+	def __init__(self, data: bytes) -> None:
+		super().__init__(data)
+
+	def as_address(self) -> str:
+		address_data_encode: bytes = base58.b58encode(self._data)
+		address_data_str: str = str(address_data_encode, 'UTF-8')
+		return address_data_str
+
+class LitecoinBlockchainAddress(BlockchainAddress):
+	"""
+	A class represents an Dogecoin Address.
+
+	Static Methods
+	-------
+	parse(address: str) -> LitecoinBlockchainAddress:
+		Parse a string representation of an address to specific `LitecoinBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+
+	try_parse(address: str) -> Optional[LitecoinBlockchainAddress]:
+		Parse a string representation of an address to specific `LitecoinBlockchainAddress`.
+		Returns `None` if address is not parsable.
+
+	Properties
+	----------
+	data: bytes
+		raw representation of address (in bytes)
+	
+	References
+	----------
+	
+	https://ru.wikipedia.org/wiki/Litecoin#:~:text=%D0%90%D0%B4%D1%80%D0%B5%D1%81%D0%B0%20Litecoin%20%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D1%82%20%D0%B8%D0%B7%2033,%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D1%82%D1%8C%20%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0%20%D1%8D%D1%82%D0%B8%D1%85%20%D0%B4%D0%B2%D1%83%D1%85%20%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%BE%D0%B2.
+	"""
+
+	@classmethod
+	def parse(cls, address: str) -> LitecoinBlockchainAddress:
+		"""
+		Parse a string representation of an address to specific `LitecoinBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+		"""
+		blockchain_address: Optional[LitecoinBlockchainAddress] = cls.try_parse(address)
+		if blockchain_address is not None:
+			return blockchain_address
+		else:
+			raise UnparsabeBlockchainAddressException(address)
+
+	@classmethod
+	def try_parse(cls, address: str) -> Optional[LitecoinBlockchainAddress]:
+		
+		"""
+		Parse a string representation of an address to specific `LitecoinBlockchainAddress`.
+		Returns `None` if address is not parsable.
+		"""
+		
+		if cls._validation_regex_Litecoin.match(address):
+			address_data_decode: bytes = base58.b58decode(address)
+			blockchain_address: LitecoinBlockchainAddress = LitecoinBlockchainAddress(address_data_decode)
+			return blockchain_address
+		
+		# TODO if cls._validation_regex_Litecoin_ltc1.match(address):
+		#			address_ltc1_data_decode: bytes = 
+		#			blockchain_address: LitecoinBlockchainAddress = LitecoinBlockchainAddress(address_ltc1_data_decode)
+		#			return blockchain_address
+		else:
+			return None
+
+	_validation_regex_Litecoin = re.compile(r"^[LM][0-9a-zA-Z]{33}$")
+	# TODO _validation_regex_Litecoin_ltc1 = re.compile(r"^ltc1[0-9a-z]{39,59}$")
+	
 
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
