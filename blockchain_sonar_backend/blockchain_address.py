@@ -42,6 +42,14 @@ class BlockchainAddress(object):
 		if litecoin_address is not None:
 			return [litecoin_address]
 
+		tron_address = TronBlockchainAddress.try_parse(address)
+		if tron_address is not None:
+			return [tron_address]
+
+		dash_address = DashBlockchainAddress.try_parse(address)
+		if dash_address is not None:
+			return [dash_address]
+
 		bitcoin_address = BitcoinBlockchainAddress.try_parse(address)
 		if bitcoin_address is not None:
 			return [bitcoin_address]
@@ -77,6 +85,13 @@ class BitcoinBlockchainAddress(BlockchainAddress):
 	----------
 	data: bytes
 		raw representation of address (in bytes)
+
+	References
+	----------
+	https://en.bitcoin.it/wiki/List_of_address_prefixes
+	https://en.bitcoin.it/wiki/Bech32
+	https://coin.space/all-about-address-types/
+	http://lenschulwitz.com/base58
 	"""
 
 	@classmethod
@@ -276,7 +291,7 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 	References
 	----------
 	https://support.ledger.com/hc/ru/articles/115005174025-Dogecoin-DOGE-?docs=true
-	https://ru.wikipedia.org/wiki/Dogecoin
+	
 	"""
 
 	@classmethod
@@ -299,19 +314,19 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 		Returns `None` if address is not parsable.
 		"""
 		
-		if cls._validation_regex_Dogecoin.match(address):
+		if cls._validation_regex_dogecoin.match(address):
 			address_data_decode: bytes = base58.b58decode(address)
 			blockchain_address: DogecoinBlockchainAddress = DogecoinBlockchainAddress(address_data_decode)
 			return blockchain_address
 		else:
 			return None
 
-	_validation_regex_Dogecoin= re.compile(r"^D[0-9a-zA-Z]{26,33}$")
+	_validation_regex_dogecoin= re.compile(r"^D[0-9a-zA-Z]{26,33}$")
 
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def as_address(self) -> str:
+	def as_dogecoin_address(self) -> str:
 		address_data_encode: bytes = base58.b58encode(self._data)
 		address_data_str: str = str(address_data_encode, 'UTF-8')
 		return address_data_str
@@ -337,8 +352,9 @@ class LitecoinBlockchainAddress(BlockchainAddress):
 	
 	References
 	----------
-	
-	https://ru.wikipedia.org/wiki/Litecoin#:~:text=%D0%90%D0%B4%D1%80%D0%B5%D1%81%D0%B0%20Litecoin%20%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D1%82%20%D0%B8%D0%B7%2033,%D0%BF%D1%80%D0%B5%D0%BE%D0%B1%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B2%D0%B0%D1%82%D1%8C%20%D0%B0%D0%B4%D1%80%D0%B5%D1%81%D0%B0%20%D1%8D%D1%82%D0%B8%D1%85%20%D0%B4%D0%B2%D1%83%D1%85%20%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%BE%D0%B2.
+	https://coin.space/all-about-address-types/
+	https://bitcoin.stackexchange.com/questions/62781/litecoin-constants-and-prefixes
+	https://en.bitcoin.it/wiki/Bech32	
 	"""
 
 	@classmethod
@@ -361,7 +377,7 @@ class LitecoinBlockchainAddress(BlockchainAddress):
 		Returns `None` if address is not parsable.
 		"""
 		
-		if cls._validation_regex_Litecoin.match(address):
+		if cls._validation_regex_litecoin.match(address):
 			address_data_decode: bytes = base58.b58decode(address)
 			blockchain_address: LitecoinBlockchainAddress = LitecoinBlockchainAddress(address_data_decode)
 			return blockchain_address
@@ -373,14 +389,137 @@ class LitecoinBlockchainAddress(BlockchainAddress):
 		else:
 			return None
 
-	_validation_regex_Litecoin = re.compile(r"^[LM][0-9a-zA-Z]{33}$")
+	_validation_regex_litecoin = re.compile(r"^[LM][0-9a-zA-Z]{33}$")
 	# TODO _validation_regex_Litecoin_ltc1 = re.compile(r"^ltc1[0-9a-z]{39,59}$")
 	
 
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def as_address(self) -> str:
+	def as_litecoin_address(self) -> str:
+		address_data_encode: bytes = base58.b58encode(self._data)
+		address_data_str: str = str(address_data_encode, 'UTF-8')
+		return address_data_str
+
+
+class TronBlockchainAddress(BlockchainAddress):
+	"""
+	A class represents an Tron Address.
+
+	Static Methods
+	-------
+	parse(address: str) -> TronBlockchainAddress:
+		Parse a string representation of an address to specific `TronBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+
+	try_parse(address: str) -> Optional[TronBlockchainAddress]:
+		Parse a string representation of an address to specific `TronBlockchainAddress`.
+		Returns `None` if address is not parsable.
+
+	Properties
+	----------
+	data: bytes
+		raw representation of address (in bytes)
+	
+	References
+	----------
+	https://developers.tron.network/docs/account
+	"""
+
+	@classmethod
+	def parse(cls, address: str) -> TronBlockchainAddress:
+		"""
+		Parse a string representation of an address to specific `TRONBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+		"""
+		blockchain_address: Optional[TronBlockchainAddress] = cls.try_parse(address)
+		if blockchain_address is not None:
+			return blockchain_address
+		else:
+			raise UnparsabeBlockchainAddressException(address)
+
+	@classmethod
+	def try_parse(cls, address: str) -> Optional[TronBlockchainAddress]:
+		
+		"""
+		Parse a string representation of an address to specific `TronBlockchainAddress`.
+		Returns `None` if address is not parsable.
+		"""
+		
+		if cls._validation_regex_tron.match(address):
+			address_data_decode: bytes = base58.b58decode(address)
+			blockchain_address: TronBlockchainAddress = TronBlockchainAddress(address_data_decode)
+			return blockchain_address
+		else:
+			return None
+
+	_validation_regex_tron = re.compile(r"^T[0-9a-zA-Z]{33}$")
+
+	def __init__(self, data: bytes) -> None:
+		super().__init__(data)
+
+	def as_tron_address(self) -> str:
+		address_data_encode: bytes = base58.b58encode(self._data)
+		address_data_str: str = str(address_data_encode, 'UTF-8')
+		return address_data_str
+
+class DashBlockchainAddress(BlockchainAddress):
+	"""
+	A class represents an Dash Address.
+
+	Static Methods
+	-------
+	parse(address: str) -> DashBlockchainAddress:
+		Parse a string representation of an address to specific `DashBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+
+	try_parse(address: str) -> Optional[DashBlockchainAddress]:
+		Parse a string representation of an address to specific `DashBlockchainAddress`.
+		Returns `None` if address is not parsable.
+
+	Properties
+	----------
+	data: bytes
+		raw representation of address (in bytes)
+	
+	References
+	----------
+	https://bitcoin.stackexchange.com/questions/83507/dash-constants-and-prefixes
+	"""
+
+	@classmethod
+	def parse(cls, address: str) -> DashBlockchainAddress:
+		"""
+		Parse a string representation of an address to specific ` DashBlockchainAddress`
+		Raise `UnparsabeBlockchainAddressException` if address is not parsable.
+		"""
+		blockchain_address: Optional[DashBlockchainAddress] = cls.try_parse(address)
+		if blockchain_address is not None:
+			return blockchain_address
+		else:
+			raise UnparsabeBlockchainAddressException(address)
+
+	@classmethod
+	def try_parse(cls, address: str) -> Optional[DashBlockchainAddress]:
+		
+		"""
+		Parse a string representation of an address to specific `DashBlockchainAddress`.
+		Returns `None` if address is not parsable.
+		"""
+		
+		if cls._validation_regex_dash.match(address):
+			address_data_decode: bytes = base58.b58decode(address)
+			blockchain_address: DashBlockchainAddress = DashBlockchainAddress(address_data_decode)
+			return blockchain_address
+		else:
+			return None
+
+	_validation_regex_dash= re.compile(r"^X[0-9a-zA-Z]{33}$")
+
+	def __init__(self, data: bytes) -> None:
+		super().__init__(data)
+
+	def as_dash_address(self) -> str:
 		address_data_encode: bytes = base58.b58encode(self._data)
 		address_data_str: str = str(address_data_encode, 'UTF-8')
 		return address_data_str

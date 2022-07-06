@@ -1,4 +1,4 @@
-from blockchain_sonar_backend.blockchain_address import BitcoinBlockchainAddress, BlockchainAddress, EthereumBlockchainAddress,DogecoinBlockchainAddress, LitecoinBlockchainAddress
+from blockchain_sonar_backend.blockchain_address import BitcoinBlockchainAddress, BlockchainAddress, EthereumBlockchainAddress,DogecoinBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress, DashBlockchainAddress
 
 
 def blockchain_resolve(address: BlockchainAddress) -> list[str]:
@@ -10,6 +10,10 @@ def blockchain_resolve(address: BlockchainAddress) -> list[str]:
 		return ["dogecoin"]
 	elif isinstance(address, LitecoinBlockchainAddress):
 		return ["litecoin"]
+	elif isinstance(address, TronBlockchainAddress):
+		return ["tron"]
+	elif isinstance(address, DashBlockchainAddress):
+		return ["dash"]
 
 	else:
 		raise Exception("Not supported address")

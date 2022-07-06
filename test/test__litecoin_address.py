@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from blockchain_sonar_backend.blockchain_address import LitecoinBlockchainAddress,Optional
 
-class TestDogecoinAddress(TestCase):
+class TestLitecoinAddress(TestCase):
 	def test__litecoin_addresses_should_be_25_bytes(self):
 		address: LitecoinBlockchainAddress = LitecoinBlockchainAddress.parse("LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
 		self.assertEqual(len(address.data), 25, "Bytes len of Litecoin should be 25")
@@ -44,7 +44,7 @@ class TestDogecoinAddress(TestCase):
 	
 	def test__dogecoin_address_check_as_legacy(self):
 		address: LitecoinBlockchainAddress = LitecoinBlockchainAddress.parse("LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
-		chek_address = address.as_address()
+		chek_address = address.as_litecoin_address()
 		self.assertEqual(chek_address, "LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
 
 	def test__litecoin_fake_address_try_parse(self):
