@@ -44,7 +44,7 @@ class TestDashAddress(TestCase):
 	
 	def test__dash_address_check_as_legacy(self):
 		address: DashBlockchainAddress = DashBlockchainAddress.parse("XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13")
-		chek_address = address.as_dash_address()
+		chek_address = address.as_string()
 		self.assertEqual(chek_address, "XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13")
 
 	def test__tron_fake_address_try_parse(self):

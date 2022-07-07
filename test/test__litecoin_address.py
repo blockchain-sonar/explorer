@@ -44,7 +44,7 @@ class TestLitecoinAddress(TestCase):
 	
 	def test__dogecoin_address_check_as_legacy(self):
 		address: LitecoinBlockchainAddress = LitecoinBlockchainAddress.parse("LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
-		chek_address = address.as_litecoin_address()
+		chek_address = address.as_string()
 		self.assertEqual(chek_address, "LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
 
 	def test__litecoin_fake_address_try_parse(self):

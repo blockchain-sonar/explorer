@@ -99,7 +99,7 @@ class TestBlockchainAddress(TestCase):
 		dogecoin_blockchain_address = filter_type_single_or_none(DogecoinBlockchainAddress, blockchain_addresses)
 		self.assertIsNotNone(dogecoin_blockchain_address, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should represent DogecoinBlockchainAddress")
 
-		reverse_dogecoin_address: str = dogecoin_blockchain_address.as_dogecoin_address()
+		reverse_dogecoin_address: str = dogecoin_blockchain_address.as_string()
 		self.assertEqual (reverse_dogecoin_address, "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
 	
 	def test__address_resolve__litecoin_as_litecoin_address(self):
@@ -115,7 +115,7 @@ class TestBlockchainAddress(TestCase):
 		litecoin_blockchain_address = filter_type_single_or_none(LitecoinBlockchainAddress, blockchain_addresses)
 		self.assertIsNotNone(litecoin_blockchain_address, "BlockchainAddress.parse('LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW') should represent LitecoinBlockchainAddress")
 
-		reverse_litecoin_address: str = litecoin_blockchain_address.as_litecoin_address()
+		reverse_litecoin_address: str = litecoin_blockchain_address.as_string()
 		self.assertEqual (reverse_litecoin_address, "LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
 
 	def test__address_resolve__tron_as_tron_address(self):
@@ -131,7 +131,7 @@ class TestBlockchainAddress(TestCase):
 		tron_blockchain_address = filter_type_single_or_none(TronBlockchainAddress, blockchain_addresses)
 		self.assertIsNotNone(tron_blockchain_address, "BlockchainAddress.parse('TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL') should represent TronBlockchainAddress")
 
-		reverse_tron_address: str = tron_blockchain_address.as_tron_address()
+		reverse_tron_address: str = tron_blockchain_address.as_string()
 		self.assertEqual (reverse_tron_address, "TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL")
 
 	def test__address_resolve__dash_as_dash_address(self):
@@ -147,5 +147,5 @@ class TestBlockchainAddress(TestCase):
 		tron_blockchain_address = filter_type_single_or_none(DashBlockchainAddress, blockchain_addresses)
 		self.assertIsNotNone(tron_blockchain_address, "BlockchainAddress.parse('XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13') should represent DashBlockchainAddress")
 
-		reverse_tron_address: str = tron_blockchain_address.as_dash_address()
+		reverse_tron_address: str = tron_blockchain_address.as_string()
 		self.assertEqual (reverse_tron_address, "XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13")

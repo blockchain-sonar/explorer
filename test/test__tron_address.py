@@ -44,7 +44,7 @@ class TestTronAddress(TestCase):
 	
 	def test__tron_address_check_as_legacy(self):
 		address: TronBlockchainAddress = TronBlockchainAddress.parse("TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL")
-		chek_address = address.as_tron_address()
+		chek_address = address.as_string()
 		self.assertEqual(chek_address, "TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL")
 
 	def test__tron_fake_address_try_parse(self):

@@ -44,7 +44,7 @@ class TestDogecoinAddress(TestCase):
 	
 	def test__dogecoin_address_check_as_legacy(self):
 		address: DogecoinBlockchainAddress = DogecoinBlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
-		chek_address = address.as_dogecoin_address()
+		chek_address = address.as_string()
 		self.assertEqual(chek_address, "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
 
 	def test__dogecoin_fake_address_try_parse(self):
