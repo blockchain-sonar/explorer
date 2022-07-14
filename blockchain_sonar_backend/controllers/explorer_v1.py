@@ -64,24 +64,10 @@ class ExplorerV1Controller(object):
 	#   curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/asset
 	#
 	def _asset_list(self):
-		return Response('''{
-	"ETH": {
-		"name": "Ether"
-	},
-	"USDT": {
-		"name": "Tether USD"
-	},
-	"BNB": {
-		"name": "Binance Coin"
-	},
-	"BUSD-T": {
-		"name": "BUSD-T Stablecoin"
-	},
-	"MATIC": {
-		"name": "MATIC"
-	}
-}
-''', mimetype="application/json")
+		from blockchain_sonar_backend.dict_asset_list import dict
+		list_asset = dict
+		#mimetype="application/json"
+		return jsonify(list_asset) 
 
 	#
 	# Call this:
