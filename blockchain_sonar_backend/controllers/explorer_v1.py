@@ -108,7 +108,7 @@ class ExplorerV1Controller(object):
 
 		currencies: list[str] = visitor.currencies 
 
-		special_address = address_str[2:]
+		short_address_str = address_str[2:]
 		
 		result = {
 		"address": address_str,
@@ -117,10 +117,10 @@ class ExplorerV1Controller(object):
 				"balance": None,
 				"alternatives": {
 					"com.blockchair": "https://blockchair.com/ethereum/address/%s" %address_str,
-					"com.blockcypher": "https://live.blockcypher.com/eth/address/%s/" %special_address,
+					"com.blockcypher": "https://live.blockcypher.com/eth/address/%s/" %short_address_str,
 					"io.etherscan": "https://etherscan.io/address/%s" %address_str,
 					"io.ethplorer": "https://ethplorer.io/address/%s" %address_str,
-					"org.etherchain": "https://etherchain.org/account/%s" %special_address
+					"org.etherchain": "https://etherchain.org/account/%s" %short_address_str
 				}
 			},
 			"USDT": {
