@@ -23,21 +23,23 @@ class CurrencyResolverVisitor(BlockchainAddressVisitor):
 		raise Exception("Not implemented yet")
 
 	def visitDashBlockchainAddress(self, address: DashBlockchainAddress):
-		raise Exception("Not implemented yet")
+		self._currencies.append("Dash")
 
 	def visitDogecoinBlockchainAddress(self, address: DogecoinBlockchainAddress):
-		raise Exception("Not implemented yet")
+		self._currencies.append("Dogecoin")
 
 	def visitEthereumBlockchainAddress(self, address: EthereumBlockchainAddress):
 		self._currencies.append("ETH")
 		self._currencies.append("USDT")
 		self._currencies.append("BNB")
+		self._currencies.append("BUSD-T")
+		self._currencies.append("MATIC")
 
 	def visitLitecoinBlockchainAddress(self, address: LitecoinBlockchainAddress):
-		raise Exception("Not implemented yet")
+		self._currencies.append("LTC")
 
 	def visitTronBlockchainAddress(self, address: TronBlockchainAddress):
-		raise Exception("Not implemented yet")
+		self._currencies.append("TRX")
 
 
 class ExplorerV1Controller(object):
@@ -86,10 +88,11 @@ class ExplorerV1Controller(object):
 	#   curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/asset/ETH
 	#
 	def _asset_fetch(self, asset: str):
-		return Response('''{
-	"name": "Ether"
-}
-''', mimetype="application/json")
+		result = {
+					"name": "%s" %asset
+				}
+		# mimetype="application/json")
+		return jsonify(result)
 
 	#
 	# Call this:
@@ -103,94 +106,98 @@ class ExplorerV1Controller(object):
 		for address in addresses:
 			address.accept(visitor)
 
-		currencies: list[str] = visitor.currencies
+		currencies: list[str] = visitor.currencies 
 
-
-		return Response('''{
-	"address": "0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
-	"assets": {
-		"ETH": {
-			"balance": null,
-			"alternatives": {
-				"com.blockchair": "https://blockchair.com/ethereum/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
-				"com.blockcypher": "https://live.blockcypher.com/eth/address/2b6828f4f227953fb36f42bda830b457afdc1c5e/",
-				"io.etherscan": "https://etherscan.io/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
-				"io.ethplorer": "https://ethplorer.io/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
-				"org.etherchain": "https://etherchain.org/account/2b6828f4f227953fb36f42bda830b457afdc1c5e"
-			}
-		},
-		"USDT": {
-			"balance": null,
-			"alternatives": {
-				"io.etherscan": "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0x2b6828f4f227953fb36f42bda830b457afdc1c5e"
-			}
-		},
-		"BNB": {
-			"balance": null,
-			"alternatives": {
-				"com.bscscan": "https://bscscan.com/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e"
-			}
-		},
-		"BUSD-T": {
-			"balance": null,
-			"alternatives": {
-				"com.bscscan": "https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955?a=0x2b6828f4f227953fb36f42bda830b457afdc1c5e"
-			}
-		},
-		,
-		"MATIC": {
-			"balance": null,
-			"alternatives": {
-				"com.polygonscan": "https://polygonscan.com/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e"
-			}
-		},
+		special_address = address_str[2:]
 		
-	}
-}
-''', mimetype="application/json")
+		result = {
+		"address": address_str,
+		"assets": {
+			"ETH": {
+				"balance": None,
+				"alternatives": {
+					"com.blockchair": "https://blockchair.com/ethereum/address/%s" %address_str,
+					"com.blockcypher": "https://live.blockcypher.com/eth/address/%s/" %special_address,
+					"io.etherscan": "https://etherscan.io/address/%s" %address_str,
+					"io.ethplorer": "https://ethplorer.io/address/%s" %address_str,
+					"org.etherchain": "https://etherchain.org/account/%s" %special_address
+				}
+			},
+			"USDT": {
+				"balance": None,
+				"alternatives": {
+					"io.etherscan": "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=%s" %address_str,
+				}
+			},
+			"BNB": {
+				"balance": None,
+				"alternatives": {
+					"com.bscscan": "https://bscscan.com/address/%s" %address_str,
+				}
+			},
+			"BUSD-T": {
+				"balance": None,
+				"alternatives": {
+					"com.bscscan": "https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955?a=%s" %address_str,
+				}
+			},
+			
+			"MATIC": {
+				"balance": None,
+				"alternatives": {
+					"com.polygonscan": "https://polygonscan.com/address/%s" %address_str,
+					
+					}
+				}
+				
+			}
+		}
+		#mimetype = "application/json"
+		return jsonify(result)
 
 	#
 	# Call this:
 	#   curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/transaction/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8
 	#
 	def _transaction(self, transaction: str):
-		return Response('''{
-	"transaction": "0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8",
-	"assets": {
-		"ETH": {
-			"value": null,
-			"alternatives": {
-				"com.blockchair": "https://blockchair.com/ethereum/transaction/0x5db0654fc868ed8cd1655038a3ef7faadcb3f7d34d1cd5b649f9e217f311cf14",
-				"com.blockcypher": "https://live.blockcypher.com/eth/tx/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8/",
-				"io.etherscan": "https://etherscan.io/tx/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8",
-				"io.ethplorer": "https://ethplorer.io/tx/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8",
-				"org.etherchain": "https://etherchain.org/tx/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8"
-			}
-		},
-		"USDT": {
-			"value": null,
-			"alternatives": {
-				"io.etherscan": "https://etherscan.io/tx/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8"
-			}
-		},
-		"BNB": {
-			"value": null,
-			"alternatives": {
-				"com.bscscan": "https://bscscan.com/tx/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8"
-			}
-		},
-		"BUSD-T": {
-			"value": null,
-			"alternatives": {
-				"com.bscscan": "https://bscscan.com/tx/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8"
-			}
-		},
-		"MATIC": {
-			"value": null,
-			"alternatives": {
-				"com.polygonscan": "https://polygonscan.com/tx/0x25eb25e730b5c0f805ec3695040b6c8a2e1ec68effc884c3ec5b7e6dd038d1a8"
+		result = {
+			"transaction": transaction,
+			"assets": {
+				"ETH": {
+					"value": None,
+					"alternatives": {
+						"com.blockchair": "https://blockchair.com/ethereum/transaction/%s" %transaction,
+						"com.blockcypher": "https://live.blockcypher.com/eth/tx/%s/" %transaction,
+						"io.etherscan": "https://etherscan.io/tx/%s" %transaction,
+						"io.ethplorer": "https://ethplorer.io/tx/%s" %transaction,
+						"org.etherchain": "https://etherchain.org/tx/%s" %transaction
+					}
+				},
+				"USDT": {
+					"value": None,
+					"alternatives": {
+						"io.etherscan": "https://etherscan.io/tx/%s" %transaction
+					}
+				},
+				"BNB": {
+					"value": None,
+					"alternatives": {
+						"com.bscscan": "https://bscscan.com/tx/%s" %transaction
+					}
+				},
+				"BUSD-T": {
+					"value": None,
+					"alternatives": {
+						"com.bscscan": "https://bscscan.com/tx/%s" %transaction
+					}
+				},
+				"MATIC": {
+					"value": None,
+					"alternatives": {
+						"com.polygonscan": "https://polygonscan.com/tx/%s" %transaction
+					}
+				}
 			}
 		}
-	}
-}
-''', mimetype="application/json")
+		#mimetype="application/json"
+		return jsonify(result)
