@@ -89,7 +89,7 @@ class ExplorerV1Controller(object):
 	#
 	def _asset_fetch(self, asset: str):
 		result = {
-					"name": "%s" %asset
+					"name": asset
 				}
 		# mimetype="application/json")
 		return jsonify(result)
