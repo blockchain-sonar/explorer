@@ -64,9 +64,9 @@ class ExplorerV1Controller(object):
 	#   curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/asset
 	#
 	def _asset_list(self):
-		from blockchain_sonar_backend.dict_asset_list import dict
-		list_asset = dict
-		#mimetype="application/json"
+		from blockchain_sonar_backend.dict_asset_list import Asset
+		asset = Asset()
+		list_asset = asset.asset_dict
 		return jsonify(list_asset) 
 
 	#
