@@ -2,19 +2,22 @@
 # See https://stackoverflow.com/questions/55248703/how-use-flask-route-with-class-based-view
 #
 
+from ast import Assert
 from flask import Blueprint, Response, current_app, jsonify, request
+from blockchain_sonar_backend.blockchain import Blockchain
 
 from blockchain_sonar_backend.blockchain_address import BitcoinBlockchainAddress, BitcoincashBlockchainAddress, BlockchainAddress, BlockchainAddressVisitor, DashBlockchainAddress, DogecoinBlockchainAddress, EthereumBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress
+from blockchain_sonar_backend.asset import ETH, USDT, Asset
 
-class CurrencyResolverVisitor(BlockchainAddressVisitor):
+class AssetResolverVisitor(BlockchainAddressVisitor):
 
 	def __init__(self) -> None:
 		super().__init__()
-		self._currencies = []
+		self._assets = []
 
 	@property
-	def currencies(self) -> list[str]:
-		return self._currencies
+	def assets(self) -> list[Asset]:
+		return self._assets
 
 	def visitBitcoinBlockchainAddress(self, address: BitcoinBlockchainAddress):
 		raise Exception("Not implemented yet")
@@ -23,23 +26,25 @@ class CurrencyResolverVisitor(BlockchainAddressVisitor):
 		raise Exception("Not implemented yet")
 
 	def visitDashBlockchainAddress(self, address: DashBlockchainAddress):
-		self._currencies.append("Dash")
+		raise Exception("Not implemented yet")
+		# self._assets.append(DASH)
 
 	def visitDogecoinBlockchainAddress(self, address: DogecoinBlockchainAddress):
-		self._currencies.append("Dogecoin")
+		raise Exception("Not implemented yet")
+		# self._assets.append(DOGE)
 
 	def visitEthereumBlockchainAddress(self, address: EthereumBlockchainAddress):
-		self._currencies.append("ETH")
-		self._currencies.append("USDT")
-		self._currencies.append("BNB")
-		self._currencies.append("BUSD-T")
-		self._currencies.append("MATIC")
+		self._assets.append(ETH)
+		self._assets.append(USDT)
+		# self._assets.append("BNB")
+		# self._assets.append("BUSD-T")
+		# self._assets.append("MATIC")
 
 	def visitLitecoinBlockchainAddress(self, address: LitecoinBlockchainAddress):
-		self._currencies.append("LTC")
+		raise Exception("Not implemented yet")
 
 	def visitTronBlockchainAddress(self, address: TronBlockchainAddress):
-		self._currencies.append("TRX")
+		raise Exception("Not implemented yet")
 
 
 class ExplorerV1Controller(object):
@@ -64,7 +69,7 @@ class ExplorerV1Controller(object):
 	#   curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/asset
 	#
 	def _asset_list(self):
-		from blockchain_sonar_backend.dict_asset_list import Asset
+		from blockchain_sonar_backend.asset import Asset
 		asset = Asset()
 		list_asset = asset.asset_dict
 		return jsonify(list_asset) 
@@ -87,58 +92,78 @@ class ExplorerV1Controller(object):
 	def _address(self, address_str: str):
 		addresses: list[BlockchainAddress] = BlockchainAddress.parse(address_str)
 
-		visitor = CurrencyResolverVisitor()
+		visitor = AssetResolverVisitor()
 
 		for address in addresses:
 			address.accept(visitor)
 
-		currencies: list[str] = visitor.currencies 
+		assets_data = {}
 
-		changed_address_str = address_str[2:]
-		
-		result = {
-		"address": address_str,
-		"assets": {
-			"ETH": {
-				"balance": None,
-				"alternatives": {
-					"com.blockchair": "https://blockchair.com/ethereum/address/%s" %address_str,
-					"com.blockcypher": "https://live.blockcypher.com/eth/address/%s/" %changed_address_str,
-					"io.etherscan": "https://etherscan.io/address/%s" %address_str,
-					"io.ethplorer": "https://ethplorer.io/address/%s" %address_str,
-					"org.etherchain": "https://etherchain.org/account/%s" %changed_address_str
-				}
-			},
-			"USDT": {
-				"balance": None,
-				"alternatives": {
-					"io.etherscan": "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=%s" %address_str,
-				}
-			},
-			"BNB": {
-				"balance": None,
-				"alternatives": {
-					"com.bscscan": "https://bscscan.com/address/%s" %address_str,
-				}
-			},
-			"BUSD-T": {
-				"balance": None,
-				"alternatives": {
-					"com.bscscan": "https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955?a=%s" %address_str,
-				}
-			},
+		# {
+		# 	"ETH": {
+		# 		"balance": None,
+		# 		"alternatives": {
+		# 			"com.blockchair": "https://blockchair.com/ethereum/address/%s" %address_str,
+		# 			"com.blockcypher": "https://live.blockcypher.com/eth/address/%s/" %changed_address_str,
+		# 			"io.etherscan": "https://etherscan.io/address/%s" %address_str,
+		# 			"io.ethplorer": "https://ethplorer.io/address/%s" %address_str,
+		# 			"org.etherchain": "https://etherchain.org/account/%s" %changed_address_str
+		# 		}
+		# 	},
+		# 	"USDT": {
+		# 		"balance": None,
+		# 		"alternatives": {
+		# 			"io.etherscan": "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=%s" %address_str,
+		# 		}
+		# 	},
+		# 	"BNB": {
+		# 		"balance": None,
+		# 		"alternatives": {
+		# 			"com.bscscan": "https://bscscan.com/address/%s" %address_str,
+		# 		}
+		# 	},
+		# 	"BUSD-T": {
+		# 		"balance": None,
+		# 		"alternatives": {
+		# 			"com.bscscan": "https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955?a=%s" %address_str,
+		# 		}
+		# 	},
 			
-			"MATIC": {
-				"balance": None,
-				"alternatives": {
-					"com.polygonscan": "https://polygonscan.com/address/%s" %address_str,
+		# 	"MATIC": {
+		# 		"balance": None,
+		# 		"alternatives": {
+		# 			"com.polygonscan": "https://polygonscan.com/address/%s" %address_str,
 					
-					}
-				}
+		# 			}
+		# 		}
 				
+		# 	}
+
+		assets: list[Asset] = visitor.assets
+		for asset in assets:
+			asset_data = {
+				"name": asset.name,
+				"balance": None,
+				"alternatives": {}
 			}
+
+			blockchain_data = []
+			for blockchain_representation in asset.blockchains:
+				blockchain: Blockchain = blockchain_representation.blockchain
+				blockchain_data.append({
+					"blockchain": blockchain.name,
+					"token": blockchain.is_token
+				})
+
+			asset_data["blockchains"] = blockchain_data
+
+			assets_data[asset.code] = asset_data
+
+		result = {
+			"address": address_str,
+			"assets": assets_data
 		}
-		#mimetype = "application/json"
+
 		return jsonify(result)
 
 	#
