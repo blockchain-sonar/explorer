@@ -33,10 +33,8 @@ DogechainExplorer = Explorer("info.dogechain")
 
 DogeblocksExplorer = Explorer("com.dogeblocks")
 
-DogeTokenviewExplorer = Explorer("com.doge.tokenview")
+TokenviewExplorer = Explorer("com.tokenview")
 
 ExplorerBitqueryExplorer = Explorer("io.explorer.bitquery")
 
 BlockexplorerExplorer = Explorer("one.blockexplorer")
-
-LtcTokenviewExplorer = Explorer("com.ltc.tokenview")
