@@ -1,25 +1,42 @@
 class Explorer:
-	def __init__(self, name: list[str]) -> None:
+	def __init__(self, name: str) -> None:
 		self._name = name
 
 	@property
 	def name(self):
 		return self._name
 
-from blockchain_sonar_backend.explorer import ExplorerV1Controller
-explorer = ExplorerV1Controller()
-address_str = explorer.address_str
-EthereumExplorer = Explorer(["com.blockchair: https://blockchair.com/ethereum/address/%s" %address_str,
-							"com.blockcypher: https://live.blockcypher.com/eth/address/%s/" %address_str,
-							"io.etherscan: https://etherscan.io/address/%s" %address_str,
-							"io.ethplorer: https://ethplorer.io/address/%s" %address_str,
-							"org.etherchain: https://etherchain.org/account/%s" %address_str
-							])
 
-USDTExplorer = Explorer(["io.etherscan: https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=%s" %address_str])
+EtherscanExplorer = Explorer("io.etherscan")
 
-BNBExplorer = Explorer(["com.bscscan: https://bscscan.com/address/%s" %address_str])
+BlockchairExplorer = Explorer("com.blockchair")
 
-BUSDTExplorer = Explorer(["com.bscscan: https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955?a=%s" %address_str])
+BlockcypherExplorer = Explorer("com.blockcypher")
 
-MATICExplorer = Explorer(["com.polygonscan: https://polygonscan.com/address/%s" %address_str])
+EthplorerExplorer = Explorer("io.ethplorer")
+
+EtherchainExplorer = Explorer("org.etherchain")
+
+BscscanExplorer = Explorer("com.bscscan")
+
+PolygonscanExplorer = Explorer("com.polygonscan")
+
+BlockchainExplorer = Explorer("com.blockchain")
+
+LitecoinblockExplorer = Explorer("net.litecoinblockexplorer")
+
+BtcExplorer = Explorer("com.btc")
+
+BitinfochartsExplorer = Explorer("com.bitinfocharts")
+
+DogechainExplorer = Explorer("info.dogechain")
+
+DogeblocksExplorer = Explorer("com.dogeblocks")
+
+DogeTokenviewExplorer = Explorer("com.doge.tokenview")
+
+ExplorerBitqueryExplorer = Explorer("io.explorer.bitquery")
+
+BlockexplorerExplorer = Explorer("one.blockexplorer")
+
+LtcTokenviewExplorer = Explorer("com.ltc.tokenview")
