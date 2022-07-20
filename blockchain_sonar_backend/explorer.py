@@ -35,6 +35,8 @@ DogeblocksExplorer = Explorer("com.dogeblocks")
 
 TokenviewExplorer = Explorer("com.tokenview")
 
-ExplorerBitqueryExplorer = Explorer("io.explorer.bitquery")
+BitqueryExplorer = Explorer("io.explorer.bitquery")
 
 BlockexplorerExplorer = Explorer("one.blockexplorer")
+
+TronscanExplorer = Explorer("org.tronscan")
