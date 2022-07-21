@@ -7,36 +7,42 @@ class Explorer:
 		return self._name
 
 
-EtherscanExplorer = Explorer("io.etherscan")
+BinancemintscanExplorer = Explorer("io.binance.mintscan")
+
+BitinfochartsExplorer = Explorer("com.bitinfocharts")
+
+BitqueryExplorer = Explorer("io.explorer.bitquery")
+
+BlockchainExplorer = Explorer("com.blockchain")
 
 BlockchairExplorer = Explorer("com.blockchair")
 
 BlockcypherExplorer = Explorer("com.blockcypher")
 
-EthplorerExplorer = Explorer("io.ethplorer")
-
-EtherchainExplorer = Explorer("org.etherchain")
+BlockexplorerExplorer = Explorer("one.blockexplorer")
 
 BscscanExplorer = Explorer("com.bscscan")
 
-PolygonscanExplorer = Explorer("com.polygonscan")
-
-BlockchainExplorer = Explorer("com.blockchain")
-
-LitecoinblockExplorer = Explorer("net.litecoinblockexplorer")
-
 BtcExplorer = Explorer("com.btc")
 
-BitinfochartsExplorer = Explorer("com.bitinfocharts")
+ChainzcryptoidExplorer = Explorer("info.chainz.cryptoid")
 
-DogechainExplorer = Explorer("info.dogechain")
+DashblockExplore = Explorer("com.dashblockexplorer")
 
 DogeblocksExplorer = Explorer("com.dogeblocks")
 
+DogechainExplorer = Explorer("info.dogechain")
+
+EtherchainExplorer = Explorer("org.etherchain")
+
+EtherscanExplorer = Explorer("io.etherscan")
+
+EthplorerExplorer = Explorer("io.ethplorer")
+
+LitecoinblockExplorer = Explorer("net.litecoinblockexplorer")
+
+PolygonscanExplorer = Explorer("com.polygonscan")
+
 TokenviewExplorer = Explorer("com.tokenview")
-
-BitqueryExplorer = Explorer("io.explorer.bitquery")
-
-BlockexplorerExplorer = Explorer("one.blockexplorer")
 
 TronscanExplorer = Explorer("org.tronscan")

@@ -9,9 +9,11 @@ class Blockchain:
 
 BitcoinBlockchain = Blockchain("Bitcoin")
 
-EthereumBlockchain = Blockchain("Ethereum")
+DashBlockchain = Blockchain("Dash")
 
 DogecoinBlockchain = Blockchain("Dogecoin")
+
+EthereumBlockchain = Blockchain("Ethereum")
 
 LitecoinBlockchain = Blockchain("Litecoin")
 

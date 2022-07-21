@@ -65,11 +65,10 @@ class AssetTokenRepresentationExplorer(AssetRepresentationExplorer):
 BTC = Asset("BTC", "Bitcoin", [
 	AssetRepresentationBlockchain(BitcoinBlockchain, False, [
 		AssetRepresentationExplorer(BlockchairExplorer, "https://blockchair.com/bitcoin/address/%s"),
-		AssetRepresentationExplorer(BlockcypherExplorer, ""),
-		AssetRepresentationExplorer(BtcExplorer, ""),
-		AssetRepresentationExplorer(BitinfochartsExplorer, ""),
-		AssetRepresentationExplorer(TokenviewExplorer, ""),
-		AssetRepresentationExplorer(BitqueryExplorer, ""),
+		AssetRepresentationExplorer(BlockcypherExplorer, "https://live.blockcypher.com/btc/address/%s/"),
+		AssetRepresentationExplorer(BtcExplorer, "https://explorer.btc.com/btc/address/%s"),
+		AssetRepresentationExplorer(BitinfochartsExplorer, "https://bitinfocharts.com/bitcoin/address/%s"),
+		AssetRepresentationExplorer(BitqueryExplorer, "https://explorer.bitquery.io/bitcoin/address/%s"),
 		AssetRepresentationExplorer(BlockexplorerExplorer, "https://blockexplorer.one/bitcoin/mainnet/address/%s")
 	])
 ])
@@ -78,22 +77,79 @@ ETH = Asset("ETH", "Ether", [
 	AssetRepresentationBlockchain(EthereumBlockchain, False, [
 		AssetRepresentationExplorer(EtherscanExplorer, "https://etherscan.io/address/%s"),
 		AssetRepresentationExplorer(EthplorerExplorer, "https://ethplorer.io/address/%s"),
-		AssetRepresentationExplorer(EtherchainExplorer, "https://etherchain.org/account/%s"),
+		AssetRepresentationExplorer(EtherchainExplorer, "https://etherchain.org/account/%s")
 	])
 ])
 
 MATIC = Asset("MATIC", "Polygon", [
 	AssetRepresentationBlockchain(EthereumBlockchain, True),
-	AssetRepresentationBlockchain(PolygonBlockchain, False)
+	AssetRepresentationExplorer(BlockchainExplorer,  "https://blockchair.com/ethereum/erc-20/token/%s"),
+	AssetRepresentationExplorer(BitqueryExplorer, "https://explorer.bitquery.io/matic/address/%s"),
+	AssetRepresentationBlockchain(PolygonBlockchain, False),
+	AssetRepresentationExplorer(PolygonscanExplorer, "https://polygonscan.com/address/%s")
 ])
 
 USDT = Asset("USDT", "Tether",[
 	AssetRepresentationBlockchain(EthereumBlockchain, True, [
 		AssetTokenRepresentationExplorer(EtherscanExplorer, "https://etherscan.io/address/%s", "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=%s"),
 		AssetRepresentationExplorer(EthplorerExplorer, "https://ethplorer.io/address/%s"),
-		AssetRepresentationExplorer(EtherchainExplorer, "https://etherchain.org/account/%s"),
+		AssetRepresentationExplorer(EtherchainExplorer, "https://etherchain.org/account/%s")
 	]),
 	AssetRepresentationBlockchain(TronBlockchain, True, [
+		AssetRepresentationExplorer(TronscanExplorer, "https://tronscan.org/#/address/%s/")
+	])
+])
+
+BNB = Asset("BNB", "Binance Coin", [
+	AssetRepresentationBlockchain(EthereumBlockchain, True, [
+		AssetRepresentationExplorer(BscscanExplorer, "https://bscscan.com/address/%s"),
+		AssetRepresentationExplorer(BitqueryExplorer, "https://explorer.bitquery.io/bsc/address/%s"),
+		AssetRepresentationExplorer(BinancemintscanExplorer, "https://binance.mintscan.io/account/%s")
+	])
+])
+
+BUSDT = Asset("BUSD-T", "BUSD Token", [
+	AssetRepresentationBlockchain(EthereumBlockchain, True, [
+		AssetRepresentationExplorer(BscscanExplorer, "https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955?a=%s"),
+		AssetRepresentationExplorer(BitqueryExplorer, "https://explorer.bitquery.io/bsc/token/%s")
+	])
+])
+
+Dogecoin = Asset("Doge", "Dogecoin", [
+	AssetRepresentationBlockchain(DogecoinBlockchain, False, [
+		AssetRepresentationExplorer(BitinfochartsExplorer,"https://bitinfocharts.com/dogecoin/address/%s"),
+		AssetRepresentationExplorer(BlockchairExplorer, "https://blockchair.com/dogecoin/address/%s"),
+		AssetRepresentationExplorer(BlockcypherExplorer, "https://live.blockcypher.com/doge/address/%s/"),
+		AssetRepresentationExplorer(DogeblocksExplorer, "https://dogeblocks.com/address/%s"),
+		AssetRepresentationExplorer(DogechainExplorer, "https://dogechain.info/address/%s")
+	])
+])
+
+Tron = Asset("TRX", "Tron", [
+	AssetRepresentationBlockchain(TronBlockchain, False, [
 		AssetRepresentationExplorer(TronscanExplorer, "https://tronscan.org/#/address/%s/"),
+		AssetRepresentationExplorer(BitqueryExplorer, "https://explorer.bitquery.io/tron/address/%s")
+	])
+])
+
+Litecoin = Asset("LTC", "Litecoin", [
+	AssetRepresentationBlockchain(LitecoinBlockchain, False, [
+		AssetRepresentationExplorer(LitecoinblockExplorer, "https://litecoinblockexplorer.net/address/%s"),
+		AssetRepresentationExplorer(ChainzcryptoidExplorer, "https://chainz.cryptoid.info/ltc/address.dws?%s.htm"),
+		AssetRepresentationExplorer(BlockexplorerExplorer, "https://blockexplorer.one/litecoin/mainnet/address/%s"),
+		AssetRepresentationExplorer(BlockcypherExplorer, "https://live.blockcypher.com/ltc/address/%s/"),
+		AssetRepresentationExplorer(BtcExplorer, "https://explorer.btc.com/ltc/%s"),
+		AssetRepresentationExplorer(BitinfochartsExplorer, "https://bitinfocharts.com/ru/litecoin/address/%s")
+	])
+])
+
+Dash = Asset("Dash", "Dash", [
+	AssetRepresentationBlockchain(DashBlockchain, False, [
+		AssetRepresentationExplorer(BlockchairExplorer, "https://blockchair.com/dash/address/%s"),
+		AssetRepresentationExplorer(BitinfochartsExplorer, "https://bitinfocharts.com/dash/address/%s"),
+		AssetRepresentationExplorer(ChainzcryptoidExplorer, "https://chainz.cryptoid.info/dash/address.dws?%s.htm"),
+		AssetRepresentationExplorer(BlockcypherExplorer, "https://live.blockcypher.com/dash/address/%s/"),
+		AssetRepresentationExplorer(DashblockExplore, "https://dashblockexplorer.com/address/%s"),
+		AssetRepresentationExplorer(BitqueryExplorer, "https://explorer.bitquery.io/dash/address/%s")
 	])
 ])

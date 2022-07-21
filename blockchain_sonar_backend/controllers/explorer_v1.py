@@ -7,7 +7,7 @@ from flask import Blueprint, Response, current_app, jsonify, request
 from blockchain_sonar_backend.blockchain import Blockchain
 
 from blockchain_sonar_backend.blockchain_address import BitcoinBlockchainAddress, BitcoincashBlockchainAddress, BlockchainAddress, BlockchainAddressVisitor, DashBlockchainAddress, DogecoinBlockchainAddress, EthereumBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress
-from blockchain_sonar_backend.asset import ETH, USDT, Asset
+from blockchain_sonar_backend.asset import ETH, USDT, BNB, BUSDT, MATIC, Asset
 
 class AssetResolverVisitor(BlockchainAddressVisitor):
 
@@ -36,9 +36,9 @@ class AssetResolverVisitor(BlockchainAddressVisitor):
 	def visitEthereumBlockchainAddress(self, address: EthereumBlockchainAddress):
 		self._assets.append(ETH)
 		self._assets.append(USDT)
-		# self._assets.append("BNB")
-		# self._assets.append("BUSD-T")
-		# self._assets.append("MATIC")
+		self._assets.append(BNB)
+		self._assets.append(BUSDT)
+		self._assets.append(MATIC)
 
 	def visitLitecoinBlockchainAddress(self, address: LitecoinBlockchainAddress):
 		raise Exception("Not implemented yet")
