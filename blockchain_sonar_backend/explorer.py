@@ -27,7 +27,7 @@ BtcExplorer = Explorer("com.btc")
 
 ChainzcryptoidExplorer = Explorer("info.chainz.cryptoid")
 
-DashblockExplore = Explorer("com.dashblockexplorer")
+DashblockExplorer = Explorer("com.dashblockexplorer")
 
 DogeblocksExplorer = Explorer("com.dogeblocks")
 
@@ -42,7 +42,5 @@ EthplorerExplorer = Explorer("io.ethplorer")
 LitecoinblockExplorer = Explorer("net.litecoinblockexplorer")
 
 PolygonscanExplorer = Explorer("com.polygonscan")
-
-TokenviewExplorer = Explorer("com.tokenview")
 
 TronscanExplorer = Explorer("org.tronscan")
