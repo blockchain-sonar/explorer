@@ -67,6 +67,9 @@ BNB = Asset("BNB", "Binance Coin", [
 		AssetRepresentationExplorer(BinancemintscanExplorer, "https://binance.mintscan.io/account/%s"),
 		AssetRepresentationExplorer(BitqueryExplorer, "https://explorer.bitquery.io/bsc/address/%s"),
 		AssetRepresentationExplorer(BscscanExplorer, "https://bscscan.com/address/%s"),
+	]),
+	AssetRepresentationBlockchain(EthereumBlockchain, True, [
+		AssetTokenRepresentationExplorer(EtherscanExplorer, "https://etherscan.io/address/%s", "https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52?a=%s"),
 	])
 ])
 
