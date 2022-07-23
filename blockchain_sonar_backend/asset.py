@@ -18,14 +18,14 @@ class Asset:
 		return self._name
 
 	@property
-	def blockchain_representation(self) -> list[AssetRepresentationBlockchain]:
+	def blockchain_representations(self) -> list[AssetRepresentationBlockchain]:
 		return self._blockchain_representations
 
 class AssetRepresentationBlockchain:
-	def __init__(self, blockchain: Blockchain, is_token: bool, representation_explorers: list[AssetRepresentationExplorer]) -> None:
+	def __init__(self, blockchain: Blockchain, is_token: bool, explorer_representations: list[AssetRepresentationExplorer]) -> None:
 		self._blockchain = blockchain
 		self._is_token = is_token
-		self._representation_explorers = representation_explorers
+		self._explorer_representations = explorer_representations
 
 	@property
 	def blockchain(self) -> Blockchain:
@@ -36,8 +36,8 @@ class AssetRepresentationBlockchain:
 		return self._is_token
 
 	@property
-	def representation_explorers(self) -> list[AssetRepresentationExplorer]:
-		return self._representation_explorers
+	def explorer_representations(self) -> list[AssetRepresentationExplorer]:
+		return self._explorer_representations
 
 class AssetRepresentationExplorer:
 	def __init__(self, explorer: Explorer, address_url_template: str) -> None:

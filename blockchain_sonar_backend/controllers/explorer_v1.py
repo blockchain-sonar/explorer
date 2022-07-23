@@ -2,12 +2,12 @@
 # See https://stackoverflow.com/questions/55248703/how-use-flask-route-with-class-based-view
 #
 
-from ast import Assert
-from flask import Blueprint, Response, current_app, jsonify, request
+from flask import Blueprint, Response, jsonify
 from blockchain_sonar_backend.blockchain import Blockchain
 
 from blockchain_sonar_backend.blockchain_address import BitcoinBlockchainAddress, BitcoincashBlockchainAddress, BlockchainAddress, BlockchainAddressVisitor, DashBlockchainAddress, DogecoinBlockchainAddress, EthereumBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress
-from blockchain_sonar_backend.asset import ETH, USDT, BNB, BUSDT, MATIC, Asset
+from blockchain_sonar_backend.asset import ETH, USDT, BNB, BUSDT, MATIC, Asset, AssetTokenRepresentationExplorer
+from blockchain_sonar_backend.explorer import Explorer
 
 class AssetResolverVisitor(BlockchainAddressVisitor):
 
@@ -88,6 +88,105 @@ class ExplorerV1Controller(object):
 	#
 	# Call this:
 	#   curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e
+	#   curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/address/DQvuJB3eHEUmdB2wi2K9B6Vdimq9DNJU7Z
+	# {
+	# 	"address": "0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 	"assets": {
+	# 		"BNB": {
+	# 			"alternatives": {
+	# 				"com.bscscan": "https://bscscan.com/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"io.binance.mintscan": "https://binance.mintscan.io/account/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"io.etherscan": "https://etherscan.io/token/0xB8c77482e45F1F44dE1745F52C74426C631bDD52?a=0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"io.explorer.bitquery": "https://explorer.bitquery.io/bsc/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e"
+	# 			},
+	# 			"balance": null,
+	# 			"blockchains": [
+	# 				{
+	# 					"blockchain": "Binance Coin",
+	# 					"token": false
+	# 				},
+	# 				{
+	# 					"blockchain": "Ethereum",
+	# 					"token": true
+	# 				}
+	# 			],
+	# 			"name": "Binance Coin"
+	# 		},
+	# 		"BUSD-T": {
+	# 			"alternatives": {
+	# 				"com.bscscan": "https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955?a=0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"io.explorer.bitquery": "https://explorer.bitquery.io/bsc/token/0x2b6828f4f227953fb36f42bda830b457afdc1c5e"
+	# 			},
+	# 			"balance": null,
+	# 			"blockchains": [
+	# 				{
+	# 					"blockchain": "Ethereum",
+	# 					"token": true
+	# 				}
+	# 			],
+	# 			"name": "BUSD Token"
+	# 		},
+	# 		"ETH": {
+	# 			"alternatives": {
+	# 				"com.bscscan": "https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"io.etherscan": "https://etherscan.io/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"io.ethplorer": "https://ethplorer.io/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"org.etherchain": "https://etherchain.org/account/0x2b6828f4f227953fb36f42bda830b457afdc1c5e"
+	# 			},
+	# 			"balance": null,
+	# 			"blockchains": [
+	# 				{
+	# 					"blockchain": "Ethereum",
+	# 					"token": false
+	# 				},
+	# 				{
+	# 					"blockchain": "Binance Coin",
+	# 					"token": true
+	# 				}
+	# 			],
+	# 			"name": "Ether"
+	# 		},
+	# 		"MATIC": {
+	# 			"alternatives": {
+	# 				"com.blockchain": "https://blockchair.com/ethereum/erc-20/token/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"com.polygonscan": "https://polygonscan.com/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"io.explorer.bitquery": "https://explorer.bitquery.io/matic/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e"
+	# 			},
+	# 			"balance": null,
+	# 			"blockchains": [
+	# 				{
+	# 					"blockchain": "Ethereum",
+	# 					"token": true
+	# 				},
+	# 				{
+	# 					"blockchain": "Polygon",
+	# 					"token": false
+	# 				}
+	# 			],
+	# 			"name": "Polygon"
+	# 		},
+	# 		"USDT": {
+	# 			"alternatives": {
+	# 				"io.etherscan": "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"io.ethplorer": "https://ethplorer.io/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"org.etherchain": "https://etherchain.org/account/0x2b6828f4f227953fb36f42bda830b457afdc1c5e",
+	# 				"org.tronscan": "https://tronscan.org/#/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e/"
+	# 			},
+	# 			"balance": null,
+	# 			"blockchains": [
+	# 				{
+	# 					"blockchain": "Ethereum",
+	# 					"token": true
+	# 				},
+	# 				{
+	# 					"blockchain": "Tron",
+	# 					"token": true
+	# 				}
+	# 			],
+	# 			"name": "Tether"
+	# 		}
+	# 	}
+	# }
 	#
 	def _address(self, address_str: str):
 		addresses: list[BlockchainAddress] = BlockchainAddress.parse(address_str)
@@ -99,46 +198,6 @@ class ExplorerV1Controller(object):
 
 		assets_data = {}
 
-		# {
-		# 	"ETH": {
-		# 		"balance": None,
-		# 		"alternatives": {
-		# 			"com.blockchair": "https://blockchair.com/ethereum/address/%s" %address_str,
-		# 			"com.blockcypher": "https://live.blockcypher.com/eth/address/%s/" %changed_address_str,
-		# 			"io.etherscan": "https://etherscan.io/address/%s" %address_str,
-		# 			"io.ethplorer": "https://ethplorer.io/address/%s" %address_str,
-		# 			"org.etherchain": "https://etherchain.org/account/%s" %changed_address_str
-		# 		}
-		# 	},
-		# 	"USDT": {
-		# 		"balance": None,
-		# 		"alternatives": {
-		# 			"io.etherscan": "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=%s" %address_str,
-		# 		}
-		# 	},
-		# 	"BNB": {
-		# 		"balance": None,
-		# 		"alternatives": {
-		# 			"com.bscscan": "https://bscscan.com/address/%s" %address_str,
-		# 		}
-		# 	},
-		# 	"BUSD-T": {
-		# 		"balance": None,
-		# 		"alternatives": {
-		# 			"com.bscscan": "https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955?a=%s" %address_str,
-		# 		}
-		# 	},
-			
-		# 	"MATIC": {
-		# 		"balance": None,
-		# 		"alternatives": {
-		# 			"com.polygonscan": "https://polygonscan.com/address/%s" %address_str,
-					
-		# 			}
-		# 		}
-				
-		# 	}
-
 		assets: list[Asset] = visitor.assets
 		for asset in assets:
 			asset_data = {
@@ -148,14 +207,30 @@ class ExplorerV1Controller(object):
 			}
 
 			blockchain_data = []
-			for blockchain_representation in asset.blockchains:
+			alternatives_data = {}
+
+			for blockchain_representation in asset.blockchain_representations:
 				blockchain: Blockchain = blockchain_representation.blockchain
+				is_token = blockchain_representation.is_token
 				blockchain_data.append({
 					"blockchain": blockchain.name,
-					"token": blockchain.is_token
+					"token": is_token
 				})
 
+				for explorer_representation in blockchain_representation.explorer_representations:
+					explorer: Explorer = explorer_representation.explorer
+
+					if is_token and isinstance(explorer_representation, AssetTokenRepresentationExplorer):
+						url_template: str = explorer_representation.token_url_template
+					else:
+						url_template: str = explorer_representation.address_url_template
+
+					explorer_code = explorer.name
+					address_url: str = url_template % address_str
+					alternatives_data[explorer_code] = address_url
+
 			asset_data["blockchains"] = blockchain_data
+			asset_data["alternatives"] = alternatives_data
 
 			assets_data[asset.code] = asset_data
 
