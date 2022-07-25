@@ -33,7 +33,7 @@ def create_app():
 	frontend_path = os.path.join(root_path, "..", "..", "frontend")
 	if os.path.isdir(frontend_path):
 		static_controller = StaticController(frontend_path)
-		app.register_blueprint(static_controller.blueprint, url_prefix="/explorer")
+		app.register_blueprint(static_controller.blueprint, url_prefix="/webapp")
 		app.logger.info("Frontend directory was found: %s" % frontend_path)
 	else:
 		app.logger.warn("Frontend directory was not found: %s" % frontend_path)
