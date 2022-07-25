@@ -7,7 +7,7 @@ source .venv/bin/activate
 pip install --requirement requirements-dev.txt
 FLASK_APP=blockchain_sonar_backend python -m flask run
 ```
-* In a browser, open [http://127.0.0.1:5000](http://127.0.0.1:5000)
+* In a browser, open [http://127.0.0.1:5000/webapp/](http://127.0.0.1:5000/webapp/)
 
 ## Run tests
 
@@ -36,6 +36,6 @@ python3.10 -m unittest -v
 Path: `/v1/address/<address>`
 
 ```
-curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/v1/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e
-curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/v1/address/DQvuJB3eHEUmdB2wi2K9B6Vdimq9DNJU7Z
+curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/address/0x2b6828f4f227953fb36f42bda830b457afdc1c5e
+curl --verbose --request GET --header 'Accept: application/json' http://127.0.0.1:5000/explorer/v1/address/DQvuJB3eHEUmdB2wi2K9B6Vdimq9DNJU7Z
 ```
