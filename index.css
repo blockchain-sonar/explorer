@@ -1,0 +1,138 @@
+/* body {
+  font-family: "Montserrat", sans-serif;
+  background: lightgrey;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: scroll;
+} */
+
+.logo_and_search {
+  /* display: flex; */
+  width: 39em;
+  height: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  /* background: red; */
+}
+.logo {
+  /* background-color: blue; */
+  position: absolute;
+  margin-left: 5.5em;
+  /* margin-right: auto; */
+  margin-top: 10px;
+}
+
+.name_logo {
+  margin-left: 20px;
+  font-size: 50px;
+  font-weight: 800;
+  color: grey;
+}
+
+.search_content {
+  background: url(icons/assets/magnifying_glass-20x20.png) no-repeat;
+  background-position: 10px;
+  width: 39.3em;
+  height: 3em;
+  text-indent: 40px;
+  margin-top: 90px;
+  margin-left: auto;
+  margin-right: auto;
+  outline: none; /*убираем стандартную обводку браузера */
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  /* -moz-border-radius: 25px; */
+  /* -webkit-border-radius: 25px; */
+  /* border-radius: 25px; закругляем углы для остальных браузеров */
+  border: lightgray;
+  font-size: 14px;
+  background-color: white;
+  display: inline-block;
+}
+
+input::placeholder {
+  color: lightgrey;
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.button_search {
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  color: grey;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  /* -moz-border-radius: 25px; 
+  -webkit-border-radius: 25px; 
+  border-radius: 25px; */
+  background-color: white;
+  height: 2.575em;
+  cursor: pointer;
+}
+
+.button_search:active {
+  color: black;
+  background: darkgrey;
+}
+
+/* .button [type="submit"]:hover {
+  color: black;
+  background: grey;
+} */
+
+input[type="search"]::-webkit-search-cancel-button {
+  margin-right: 1em;
+}
+
+
+.list_coins {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  width: 30em;
+  /* height: 20em; */
+  /* align-items: center; */
+  /* align-content: center; */
+  /* margin-top: 1.5em; */
+  margin-right: auto;
+  margin-left: auto;
+  /* background: green; */
+}
+
+.coins {
+  height: 60px;
+  width: 60px;
+  background: lightgrey;
+  margin-top: 3em;
+  margin-left: 3em;
+  /* padding: 0; */
+}
+
+/* #fat_footer {
+	position: fixed;
+	bottom: 0px;
+	height: 145px;
+	width: 100%;
+	background: #f4f0f0;
+	border-top: thin solid grey;
+	font-size: small;
+	color: #999;
+} */
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .logo_and_search .search_content .list_coins {
+    float: none;
+    width: auto;
+    /* clear: both; */
+  }
+}
+@media (max-width: 481px) {
+  .logo_and_search .search_content .list_coins {
+    float: none;
+    width: auto;
+  }
+}

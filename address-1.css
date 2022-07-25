@@ -1,0 +1,160 @@
+* {
+  box-sizing: border-box;
+}
+
+@supports (grid-template-rows: masonry) {
+  .card-host {
+    display: grid;
+    /* same as margin is not masony card */
+    gap: 2px;
+    grid-template-columns: repeat(auto-fill, 150px);
+    grid-template-rows: masonry;
+    justify-content: center;
+  }
+}
+
+@supports not (grid-template-rows: masonry) {
+  .card-host {
+    display: block;
+    margin: 0 auto;
+  }
+  .card-host:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  .card {
+    /* same as gap in masonry */
+    margin: 2px;
+  }
+}
+
+.header{
+	width: 500px;
+	height: 40px;
+	border: solid;
+}
+
+.card-host {
+  /* background: rgb(200, 0, 255); */
+}
+
+.card {
+  width: 150px;
+}
+.card-content {
+  /* margin-right: 20px; */
+  font-size: smaller;
+  word-wrap: break-word;
+  display: inline-block;
+  text-align: center;
+}
+ul{
+	/* background-color: azure; */
+	padding-left: 15px;
+}
+
+.currency-name {
+  display: inline-block;
+  text-align: center;
+}
+
+.currency-1 {
+  /* height: 200px; */
+  /* background-color: red; */
+  border: solid;
+  padding: 5px;
+}
+
+.currency-2 {
+  /* height: 200px; */
+  /* background-color: aqua; */
+  padding: 5px;
+  border: solid;
+}
+
+.currency-3 {
+  /* height: 100px; */
+  /* background-color: aquamarine; */
+  padding: 5px;
+  border: solid;
+}
+.currency-4 {
+  /* height: 200px; */
+  /* background-color: white; */
+  padding: 5px;
+  border: solid;
+}
+
+.currency-5 {
+  /* height: 180px; */
+  /* background-color: rgb(178, 178, 232); */
+  padding: 5px;
+  border: solid;
+}
+
+.currency-6 {
+  /* height: 250px; */
+  /* background-color: blueviolet; */
+  padding: 5px;
+  border: solid;
+}
+
+.currency-7 {
+  /* height: 420px; */
+  background-color: brown;
+}
+
+.currency-8 {
+  /* height: 150px; */
+  background-color: burlywood;
+}
+
+.currency-9 {
+  /* height: 320px; */
+  background-color: cadetblue;
+}
+
+.currency-10 {
+  /* height: 390px; */
+  background-color: green;
+}
+
+.currency-11 {
+  /* height: 200px; */
+  background-color: greenyellow;
+}
+
+.currency-12 {
+  /* height: 310px; */
+  background-color: yellow;
+}
+
+.currency-13 {
+  /* height: 400px; */
+  background-color: violet;
+}
+
+.currency-14 {
+  /* height: 230px; */
+  background-color: chocolate;
+}
+.currency-15 {
+  /* height: 280px; */
+  background-color: cornflowerblue;
+}
+
+.currency-16 {
+  /* height: 380px; */
+  background-color: crimson;
+}
+
+.currency-17 {
+  /* height: 290px; */
+  background-color: darkblue;
+}
+
+.currency-18 {
+  /* height: 190px; */
+  background-color: dodgerblue;
+}
