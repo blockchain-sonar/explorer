@@ -6,7 +6,7 @@ from flask import Blueprint, Response, jsonify
 from blockchain_sonar_backend.blockchain import Blockchain
 
 from blockchain_sonar_backend.blockchain_address import BitcoinBlockchainAddress, BitcoincashBlockchainAddress, BlockchainAddress, BlockchainAddressVisitor, DashBlockchainAddress, DogecoinBlockchainAddress, EthereumBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress
-from blockchain_sonar_backend.asset import ETH, USDT, BNB, BUSDT, MATIC, Asset, AssetTokenRepresentationExplorer
+from blockchain_sonar_backend.asset import ETH, USDT, BNB, BUSDT, MATIC, Dash, Dogecoin, Tron, Litecoin, Asset, AssetTokenRepresentationExplorer
 from blockchain_sonar_backend.explorer import Explorer
 
 class AssetResolverVisitor(BlockchainAddressVisitor):
@@ -26,12 +26,10 @@ class AssetResolverVisitor(BlockchainAddressVisitor):
 		raise Exception("Not implemented yet")
 
 	def visitDashBlockchainAddress(self, address: DashBlockchainAddress):
-		raise Exception("Not implemented yet")
-		# self._assets.append(DASH)
+		self._assets.append(Dash)
 
 	def visitDogecoinBlockchainAddress(self, address: DogecoinBlockchainAddress):
-		raise Exception("Not implemented yet")
-		# self._assets.append(DOGE)
+		self._assets.append(Dogecoin)
 
 	def visitEthereumBlockchainAddress(self, address: EthereumBlockchainAddress):
 		self._assets.append(ETH)
@@ -41,10 +39,10 @@ class AssetResolverVisitor(BlockchainAddressVisitor):
 		self._assets.append(MATIC)
 
 	def visitLitecoinBlockchainAddress(self, address: LitecoinBlockchainAddress):
-		raise Exception("Not implemented yet")
+		self._assets.append(Litecoin)
 
 	def visitTronBlockchainAddress(self, address: TronBlockchainAddress):
-		raise Exception("Not implemented yet")
+		self._assets.append(Tron)
 
 
 class ExplorerV1Controller(object):

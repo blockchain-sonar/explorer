@@ -8,6 +8,7 @@ source .venv/bin/activate
 pip install --upgrade pip
 pip install --requirement requirements-dev.txt
 FLASK_APP=blockchain_sonar_backend python -m flask run
+In a browser, open [http://127.0.0.1:5000] (http://127.0.0.1:5000)
 ```
 
 ## Run tests

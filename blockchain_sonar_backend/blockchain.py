@@ -7,7 +7,7 @@ class Blockchain:
 		return self._name
 
 
-BinanceSmartChainBlockchain = Blockchain("Binance Coin")
+BinanceSmartChainBlockchain = Blockchain("Binance Smart Coin")
 
 BitcoinBlockchain = Blockchain("Bitcoin")
 
