@@ -4,7 +4,7 @@ import re
 import eth_utils
 import base58
 
-class UnparsableBlockchainAddressException(Exception):
+class UnparsableAddressException(Exception):
 	def __init__(self, address: str):
 		super().__init__("Unable to parse blockchain address '%s'" % address)
 		self._address = address
@@ -13,7 +13,7 @@ class UnparsableBlockchainAddressException(Exception):
 	def address(self) -> str:
 		return self._address
 
-class BlockchainAddressVisitor(object):
+class AddressVisitor(object):
 	def visitBitcoinBlockchainAddress(self, address: BitcoinBlockchainAddress):
 		raise Exception("Abstart method")
 
@@ -35,7 +35,7 @@ class BlockchainAddressVisitor(object):
 	def visitTronBlockchainAddress(self, address: TronBlockchainAddress):
 		raise Exception("Abstart method")
 
-class BlockchainAddress(object):
+class Address(object):
 	"""
 	A base class to represent an Blockchain Address.
 
@@ -51,7 +51,7 @@ class BlockchainAddress(object):
 	"""
 
 	@classmethod
-	def parse(cls, address: str) -> list[BlockchainAddress]:
+	def parse(cls, address: str) -> list[Address]:
 		ethereum_address = EthereumBlockchainAddress.try_parse(address)
 		if ethereum_address is not None:
 			return [ethereum_address]
@@ -76,7 +76,7 @@ class BlockchainAddress(object):
 		if bitcoin_address is not None:
 			return [bitcoin_address]
 		
-		raise UnparsableBlockchainAddressException(address)
+		raise UnparsableAddressException(address)
 
 	def __init__(self, data: bytes) -> None:
 		self._data = bytes(data)
@@ -85,13 +85,13 @@ class BlockchainAddress(object):
 	def data(self):
 		return self._data
 
-	def accept(self, visitor: BlockchainAddressVisitor):
+	def accept(self, visitor: AddressVisitor):
 		raise Exception("Abstart method")
 
 	def as_string(self) -> str:
 		raise Exception("Abstart method")
 
-class BitcoinBlockchainAddress(BlockchainAddress):
+class BitcoinBlockchainAddress(Address):
 	"""
 	A class represents an Bitcoin Address.
 
@@ -131,7 +131,7 @@ class BitcoinBlockchainAddress(BlockchainAddress):
 		blockchain_address: Optional[BitcoinBlockchainAddress] = cls.try_parse(address)
 		if blockchain_address is not None:
 			return blockchain_address
-		raise UnparsableBlockchainAddressException(address)
+		raise UnparsableAddressException(address)
 
 	@classmethod
 	def try_parse(cls, address: str) -> Optional[BitcoinBlockchainAddress]:
@@ -146,13 +146,13 @@ class BitcoinBlockchainAddress(BlockchainAddress):
 		# 	raise Exception("Wrong data for address")
 		super().__init__(data)
 
-	def accept(self, visitor: BlockchainAddressVisitor):
+	def accept(self, visitor: AddressVisitor):
 		visitor.visitBitcoinBlockchainAddress(self)
 
 	def as_string(self) -> str:
 		raise Exception("Not impelented yet")
 
-class BitcoincashBlockchainAddress(BlockchainAddress):
+class BitcoincashBlockchainAddress(Address):
 	"""
 	A class represents an BitcoinCash Address.
 
@@ -189,7 +189,7 @@ class BitcoincashBlockchainAddress(BlockchainAddress):
 		blockchain_address: Optional[BitcoincashBlockchainAddress] = cls.try_parse(address)
 		if blockchain_address is not None:
 			return blockchain_address
-		raise UnparsableBlockchainAddressException(address)
+		raise UnparsableAddressException(address)
 
 	@classmethod
 	def try_parse(cls, address: str) -> Optional[BitcoincashBlockchainAddress]:
@@ -204,13 +204,13 @@ class BitcoincashBlockchainAddress(BlockchainAddress):
 		# 	raise Exception("Wrong data for address")
 		super().__init__(data)
 
-	def accept(self, visitor: BlockchainAddressVisitor):
+	def accept(self, visitor: AddressVisitor):
 		visitor.visitBitcoincashBlockchainAddress(self)
 
 	def as_string(self) -> str:
 		raise Exception("Not impelented yet")
 
-class EthereumBlockchainAddress(BlockchainAddress):
+class EthereumBlockchainAddress(Address):
 	"""
 	A class represents an Ethereum Address.
 
@@ -243,7 +243,7 @@ class EthereumBlockchainAddress(BlockchainAddress):
 		blockchain_address: Optional[EthereumBlockchainAddress] = cls.try_parse(address)
 		if blockchain_address is not None:
 			return blockchain_address
-		raise UnparsableBlockchainAddressException(address)
+		raise UnparsableAddressException(address)
 
 	@classmethod
 	def try_parse(cls, address: str) -> Optional[EthereumBlockchainAddress]:
@@ -270,7 +270,7 @@ class EthereumBlockchainAddress(BlockchainAddress):
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def accept(self, visitor: BlockchainAddressVisitor):
+	def accept(self, visitor: AddressVisitor):
 		visitor.visitEthereumBlockchainAddress(self)
 
 	def as_string(self) -> str:
@@ -314,7 +314,7 @@ class EthereumBlockchainAddress(BlockchainAddress):
 #	def __init__(self, data: bytes) -> None:
 #		super().__init__(data)
 
-class DogecoinBlockchainAddress(BlockchainAddress):
+class DogecoinBlockchainAddress(Address):
 	"""
 	A class represents an Dogecoin Address.
 
@@ -349,7 +349,7 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 		if blockchain_address is not None:
 			return blockchain_address
 		else:
-			raise UnparsableBlockchainAddressException(address)
+			raise UnparsableAddressException(address)
 
 	@classmethod
 	def try_parse(cls, address: str) -> Optional[DogecoinBlockchainAddress]:
@@ -371,7 +371,7 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def accept(self, visitor: BlockchainAddressVisitor):
+	def accept(self, visitor: AddressVisitor):
 		visitor.visitDogecoinBlockchainAddress(self)
 
 	def as_string(self) -> str:
@@ -379,7 +379,7 @@ class DogecoinBlockchainAddress(BlockchainAddress):
 		address_data_str: str = str(address_data_encode, 'UTF-8')
 		return address_data_str
 
-class LitecoinBlockchainAddress(BlockchainAddress):
+class LitecoinBlockchainAddress(Address):
 	"""
 	A class represents an Dogecoin Address.
 
@@ -415,7 +415,7 @@ class LitecoinBlockchainAddress(BlockchainAddress):
 		if blockchain_address is not None:
 			return blockchain_address
 		else:
-			raise UnparsableBlockchainAddressException(address)
+			raise UnparsableAddressException(address)
 
 	@classmethod
 	def try_parse(cls, address: str) -> Optional[LitecoinBlockchainAddress]:
@@ -444,7 +444,7 @@ class LitecoinBlockchainAddress(BlockchainAddress):
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def accept(self, visitor: BlockchainAddressVisitor):
+	def accept(self, visitor: AddressVisitor):
 		visitor.visitLitecoinBlockchainAddress(self)
 
 	def as_string(self) -> str:
@@ -452,7 +452,7 @@ class LitecoinBlockchainAddress(BlockchainAddress):
 		address_data_str: str = str(address_data_encode, 'UTF-8')
 		return address_data_str
 
-class TronBlockchainAddress(BlockchainAddress):
+class TronBlockchainAddress(Address):
 	"""
 	A class represents an Tron Address.
 
@@ -486,7 +486,7 @@ class TronBlockchainAddress(BlockchainAddress):
 		if blockchain_address is not None:
 			return blockchain_address
 		else:
-			raise UnparsableBlockchainAddressException(address)
+			raise UnparsableAddressException(address)
 
 	@classmethod
 	def try_parse(cls, address: str) -> Optional[TronBlockchainAddress]:
@@ -508,7 +508,7 @@ class TronBlockchainAddress(BlockchainAddress):
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def accept(self, visitor: BlockchainAddressVisitor):
+	def accept(self, visitor: AddressVisitor):
 		visitor.visitTronBlockchainAddress(self)
 
 	def as_string(self) -> str:
@@ -516,7 +516,7 @@ class TronBlockchainAddress(BlockchainAddress):
 		address_data_str: str = str(address_data_encode, 'UTF-8')
 		return address_data_str
 
-class DashBlockchainAddress(BlockchainAddress):
+class DashBlockchainAddress(Address):
 	"""
 	A class represents an Dash Address.
 
@@ -550,7 +550,7 @@ class DashBlockchainAddress(BlockchainAddress):
 		if blockchain_address is not None:
 			return blockchain_address
 		else:
-			raise UnparsableBlockchainAddressException(address)
+			raise UnparsableAddressException(address)
 
 	@classmethod
 	def try_parse(cls, address: str) -> Optional[DashBlockchainAddress]:
@@ -572,7 +572,7 @@ class DashBlockchainAddress(BlockchainAddress):
 	def __init__(self, data: bytes) -> None:
 		super().__init__(data)
 
-	def accept(self, visitor: BlockchainAddressVisitor):
+	def accept(self, visitor: AddressVisitor):
 		visitor.visitDashBlockchainAddress(self)
 
 	def as_string(self) -> str:

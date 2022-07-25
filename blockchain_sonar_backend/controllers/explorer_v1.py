@@ -5,11 +5,11 @@
 from flask import Blueprint, Response, jsonify
 from blockchain_sonar_backend.blockchain import Blockchain
 
-from blockchain_sonar_backend.blockchain_address import BitcoinBlockchainAddress, BitcoincashBlockchainAddress, BlockchainAddress, BlockchainAddressVisitor, DashBlockchainAddress, DogecoinBlockchainAddress, EthereumBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress
+from blockchain_sonar_backend.address import BitcoinBlockchainAddress, BitcoincashBlockchainAddress, Address, AddressVisitor, DashBlockchainAddress, DogecoinBlockchainAddress, EthereumBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress
 from blockchain_sonar_backend.asset import ETH, USDT, BNB, BUSDT, MATIC, Dash, Dogecoin, Tron, Litecoin, Asset, AssetTokenRepresentationExplorer
 from blockchain_sonar_backend.explorer import Explorer
 
-class AssetResolverVisitor(BlockchainAddressVisitor):
+class AssetResolverVisitor(AddressVisitor):
 
 	def __init__(self) -> None:
 		super().__init__()
@@ -187,7 +187,7 @@ class ExplorerV1Controller(object):
 	# }
 	#
 	def _address(self, address_str: str):
-		addresses: list[BlockchainAddress] = BlockchainAddress.parse(address_str)
+		addresses: list[Address] = Address.parse(address_str)
 
 		visitor = AssetResolverVisitor()
 

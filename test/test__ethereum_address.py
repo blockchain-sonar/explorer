@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from blockchain_sonar_backend.blockchain_address import EthereumBlockchainAddress
+from blockchain_sonar_backend.address import EthereumBlockchainAddress
 
 class TestEthereumAddress(TestCase):
 	def test__ethereum_address_should_be_20_bytes(self):

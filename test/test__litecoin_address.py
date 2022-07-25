@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from blockchain_sonar_backend.blockchain_address import LitecoinBlockchainAddress,Optional
+from blockchain_sonar_backend.address import LitecoinBlockchainAddress,Optional
 
 class TestLitecoinAddress(TestCase):
 	def test__litecoin_addresses_should_be_25_bytes(self):

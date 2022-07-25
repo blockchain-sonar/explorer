@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from blockchain_sonar_backend.blockchain_address import DogecoinBlockchainAddress,Optional
+from blockchain_sonar_backend.address import DogecoinBlockchainAddress,Optional
 
 class TestDogecoinAddress(TestCase):
 	def test__dogecoin_address_should_be_25_bytes(self):

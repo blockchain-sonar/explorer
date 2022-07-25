@@ -27,13 +27,13 @@ def create_app():
 	explorer_v1_controller_instance = ExplorerV1Controller()
 
 	app.register_error_handler(HTTPException, _handle_exception)
-	app.register_blueprint(explorer_v1_controller_instance.blueprint, url_prefix="/explorer/v1")
+	app.register_blueprint(explorer_v1_controller_instance.blueprint, url_prefix="/v1")
 
 	root_path = app.root_path
 	frontend_path = os.path.join(root_path, "..", "..", "frontend")
 	if os.path.isdir(frontend_path):
 		static_controller = StaticController(frontend_path)
-		app.register_blueprint(static_controller.blueprint, url_prefix="/explorer")
+		app.register_blueprint(static_controller.blueprint, url_prefix="/")
 		app.logger.info("Frontend directory was found: %s" % frontend_path)
 	else:
 		app.logger.warn("Frontend directory was not found: %s" % frontend_path)

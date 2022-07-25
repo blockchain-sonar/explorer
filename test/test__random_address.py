@@ -1,21 +1,22 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 
-from blockchain_sonar_backend.blockchain_address import BitcoincashBlockchainAddress, BlockchainAddress, BitcoinBlockchainAddress, EthereumBlockchainAddress,DogecoinBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress, DashBlockchainAddress
-from blockchain_sonar_backend.utils.collections import filter_type_single, filter_type_single_or_none
+from blockchain_sonar_backend.address import BitcoincashBlockchainAddress, Address, BitcoinBlockchainAddress, EthereumBlockchainAddress,DogecoinBlockchainAddress, LitecoinBlockchainAddress, TronBlockchainAddress, DashBlockchainAddress
+from blockchain_sonar_backend.utils.collections import filter_type_single_or_none
 
 
-
-class TestBlockchainAddress(TestCase):
+class TestRandomAddress(TestCase):
+	@skip("Bitcoin is not ready yet")
 	def test__address_resolve__bitcoin_1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2(self):
-		blockchain_addresses = BlockchainAddress.parse("1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2")
+		blockchain_addresses = Address.parse("1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2') should return list")
 
 		bitcoin_blockchain_address: BitcoinBlockchainAddress = filter_type_single_or_none(BitcoinBlockchainAddress, blockchain_addresses)
 		self.assertIsNotNone(bitcoin_blockchain_address, "BlockchainAddress.parse('1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2') should represent BitcoinBlockchainAddress")
 
+	@skip("Bitcoin is not ready yet")
 	def test__address_resolve__bitcoincash_1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2(self):
-		blockchain_addresses = BlockchainAddress.parse("1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2")
+		blockchain_addresses = Address.parse("1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2') should return list")
 	
@@ -27,7 +28,7 @@ class TestBlockchainAddress(TestCase):
 		In the test we parse legacy format address "0xd3cda913deb6f67967b99d67acdfa1712c293601"
 		and trying to represent it as_legacy_address
 		"""
-		blockchain_addresses = BlockchainAddress.parse("0xd3cda913deb6f67967b99d67acdfa1712c293601")
+		blockchain_addresses = Address.parse("0xd3cda913deb6f67967b99d67acdfa1712c293601")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('0xd3cda913deb6f67967b99d67acdfa1712c293601') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('0xd3cda913deb6f67967b99d67acdfa1712c293601') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('0xd3cda913deb6f67967b99d67acdfa1712c293601') should return list with single element")
@@ -43,7 +44,7 @@ class TestBlockchainAddress(TestCase):
 		In the test we parse legacy format address "0xd3cda913deb6f67967b99d67acdfa1712c293601"
 		and trying to represent it as_eip55_address
 		"""
-		blockchain_addresses = BlockchainAddress.parse("0xd3cda913deb6f67967b99d67acdfa1712c293601")
+		blockchain_addresses = Address.parse("0xd3cda913deb6f67967b99d67acdfa1712c293601")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('0xd3cda913deb6f67967b99d67acdfa1712c293601') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('0xd3cda913deb6f67967b99d67acdfa1712c293601') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('0xd3cda913deb6f67967b99d67acdfa1712c293601') should return list with single element")
@@ -59,7 +60,7 @@ class TestBlockchainAddress(TestCase):
 		In the test we parse EIP-55 format address "0xd3cda913deb6f67967b99d67acdfa1712c293601"
 		and trying to represent it as_legacy_address
 		"""
-		blockchain_addresses = BlockchainAddress.parse("0xd3CdA913deB6f67967B99D67aCDFa1712C293601")
+		blockchain_addresses = Address.parse("0xd3CdA913deB6f67967B99D67aCDFa1712C293601")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('0xd3CdA913deB6f67967B99D67aCDFa1712C293601') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('0xd3CdA913deB6f67967B99D67aCDFa1712C293601') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('0xd3CdA913deB6f67967B99D67aCDFa1712C293601') should return list with single element")
@@ -75,7 +76,7 @@ class TestBlockchainAddress(TestCase):
 		In the test we parse EIP-55 format address "0xd3cda913deb6f67967b99d67acdfa1712c293601"
 		and trying to represent it as_eip55_address
 		"""
-		blockchain_addresses = BlockchainAddress.parse("0xd3CdA913deB6f67967B99D67aCDFa1712C293601")
+		blockchain_addresses = Address.parse("0xd3CdA913deB6f67967B99D67aCDFa1712C293601")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('0xd3CdA913deB6f67967B99D67aCDFa1712C293601') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('0xd3CdA913deB6f67967B99D67aCDFa1712C293601') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('0xd3CdA913deB6f67967B99D67aCDFa1712C293601') should return list with single element")
@@ -91,7 +92,7 @@ class TestBlockchainAddress(TestCase):
 		In the test we parse Dogecoin format address "DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k"
 		and trying to represent it as_dogecoin_address
 		"""
-		blockchain_addresses = BlockchainAddress.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
+		blockchain_addresses = Address.parse("DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('DRSqEwcnJX3GZWH9Twtwk8D5ewqdJzi13k') should return list with single element")
@@ -107,7 +108,7 @@ class TestBlockchainAddress(TestCase):
 		In the test we parse Litecoin format address "LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW"
 		and trying to represent it as_litecoin_address
 		"""
-		blockchain_addresses = BlockchainAddress.parse("LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
+		blockchain_addresses = Address.parse("LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('LVoj2zxgNxe5qGuLxdUU2pKKGbgA4BgypW') should return list with single element")
@@ -123,7 +124,7 @@ class TestBlockchainAddress(TestCase):
 		In the test we parse Tron format address "TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL"
 		and trying to represent it as_tron_address
 		"""
-		blockchain_addresses = BlockchainAddress.parse("TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL")
+		blockchain_addresses = Address.parse("TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('TNPeeaaFB7K9cmo4uQpcU32zGK8G1NYqeL') should return list with single element")
@@ -139,7 +140,7 @@ class TestBlockchainAddress(TestCase):
 		In the test we parse Dash format address "XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13"
 		and trying to represent it as_dash_address
 		"""
-		blockchain_addresses = BlockchainAddress.parse("XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13")
+		blockchain_addresses = Address.parse("XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13")
 		self.assertIsNotNone(blockchain_addresses, "BlockchainAddress.parse('XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13') should not return None")
 		self.assertIsInstance(blockchain_addresses, list, "BlockchainAddress.parse('XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13') should return list")
 		self.assertEqual(len(blockchain_addresses), 1, "BlockchainAddress.parse('XwxeKFtAXa9wGvX4QijQxz2yC4hMzfAa13') should return list with single element")

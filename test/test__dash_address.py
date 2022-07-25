@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from blockchain_sonar_backend.blockchain_address import DashBlockchainAddress,Optional
+from blockchain_sonar_backend.address import DashBlockchainAddress,Optional
 
 class TestDashAddress(TestCase):
 	def test__tron_addresses_should_be_25_bytes(self):
