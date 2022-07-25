@@ -1,8 +1,10 @@
 #
+# See https://flask.palletsprojects.com/en/2.1.x/tutorial/static/
+# See https://stackoverflow.com/questions/20646822/how-to-serve-static-files-in-flask
 # See https://stackoverflow.com/questions/55248703/how-use-flask-route-with-class-based-view
 #
 
-from flask import Blueprint, Response, current_app, jsonify, request, send_from_directory
+from flask import Blueprint, abort, send_from_directory
 
 class StaticController(object):
 
@@ -10,7 +12,30 @@ class StaticController(object):
 		self._static_folder = static_folder
 
 		self.blueprint = Blueprint('Static', __name__)
+		self.blueprint.add_url_rule('/address/<path:address>', methods=["GET"], view_func=self._download_address)
 		self.blueprint.add_url_rule('/<path:name>', methods=["GET"], view_func=self._download_file)
+		self.blueprint.add_url_rule('/', methods=["GET"], view_func=self._download_index)
 
 	def _download_file(self, name: str):
-		return send_from_directory(self._static_folder, name)
+		if name.endswith(".html"):
+			# Prevent ".html" in URL
+			abort(404)
+
+		if name == "index":
+			# Prevent "index" in URL
+			abort(404)
+
+		filename: str = name
+		if "." not in filename:
+			filename: str = filename + ".html"
+
+		return send_from_directory(self._static_folder, filename)
+
+	def _download_address(self, address: str):
+		if "." in address:
+			# Look like address is a path, so loading as file
+			return send_from_directory(self._static_folder, address)
+		return send_from_directory(self._static_folder, "address.html")
+
+	def _download_index(self):
+		return send_from_directory(self._static_folder, "index.html")

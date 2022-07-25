@@ -1,15 +1,13 @@
 # Backend of blockchain sonar
-TBD
-
 ## Quick Start
+* Launch backend
 ```shell
 python3.10 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade pip
 pip install --requirement requirements-dev.txt
 FLASK_APP=blockchain_sonar_backend python -m flask run
-In a browser, open [http://127.0.0.1:5000] (http://127.0.0.1:5000)
 ```
+* In a browser, open [http://127.0.0.1:5000/explorer](http://127.0.0.1:5000/explorer)
 
 ## Run tests
 
