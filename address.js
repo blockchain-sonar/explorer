@@ -1,8 +1,9 @@
 // http://127.0.0.1:5000/webapp/address/0xd3cda913deb6f67967b99d67acdfa1712c293601
+// http://127.0.0.1:5000/explorer/v1/address/0xd3cda913deb6f67967b99d67acdfa1712c293601
 
 window.onload = function () {
 	const xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://127.0.0.1:5000/webapp/address/0xd3cda913deb6f67967b99d67acdfa1712c293601', true);
+	xhr.open('GET', 'http://127.0.0.1:5000/webapp/address/%s', true);
 	//xhr.responseType = 'json';
 	xhr.send();
 	xhr.onload = function() {
