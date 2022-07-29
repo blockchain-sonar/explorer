@@ -21,3 +21,7 @@ window.onload = function () {
 		p.innerText = responseObj;
 		document.getElementById("content").appendChild(p);
   }
+
+  function buildAssetUIBlock(targetElement, assetCode, balance, blockchains, alternatives) {
+	
+	}

@@ -3,81 +3,119 @@
 <head>
   <script src="address.js" lang="javascript"></script>
   <style>
-	.block1 { 
+	.page-title { 
 	 width: 200px; 
-	 background: #fc0; 
-	 padding: 5px;
-	 padding-right: 365px; 
+	 background: #ff0033; 
+	 padding: 10px;
+	 padding-right: 645px; 
 	 border: solid 1px black; 
-	 float: left;
 	 text-align:  center;
    white-space: nowrap;
+   font-size: 150%; 
 	}
+  .address { 
+	 width: 200px; 
+	 background: #edd710; 
+	 padding: 10px;
+	 padding-right: 280px; 
+	 border: solid 1px black; 
+	 text-align:  center;
+   white-space: nowrap;
+   font-size: 0.6em;
+	}
+
+  .asset1 {
+    width: 200px; 
+    background: #83ee6b; 
+    padding: 10px;
+    padding-right: 370px; 
+    border: solid 1px black; 
+   }
+
+   .asset2 {
+    width: 200px; 
+    background: #83ee6b; 
+    padding: 10px;
+    padding-right: 370px; 
+    border: solid 1px black;
+   }
    
    </style> 
 </head>
 
 <body>
-  <div class="block1"><h1>Welcome to Blockchain Sonar's Explorer</h1></div>
+  <p><div class="page-title"><h1>Welcome to Blockchain Sonar's Explorer</h1></div></p>
   
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
-  <br/>
+<p></p>
   
   <!-- <div id="content"></div> -->
+  <div class="address"><h1>Address: 0xd3cda913deb6f67967b99d67acdfa1712c293601</h1></div>
+  <!-- <p><div class="address"><h1><span style="color:black;font-weight:bold">Address:</span> 0xd3cda913deb6f67967b99d67acdfa1712c293601</h1></div></p> -->
+  <!-- <p><span style="color:black;font-weight:bold">Address:</span> 0xd3cda913deb6f67967b99d67acdfa1712c293601</p> -->
+  
+<p></p>
 
-  <div>
-    <span>Address: 0xd3cda913deb6f67967b99d67acdfa1712c293601</span>
-	  <br/>
-    <br/>
-    <span>Asset: ETH</span>
-    <br/>
-    <span>Alternatives: com.bscscan: "https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0xd3cda913deb6f67967b99d67acdfa1712c293601",
-                        <br/>
-                        io.etherscan: "https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601", 
-                        <br/>
-                        io.ethplorer: "https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601", 
-                        <br/>
-                        org.etherchain: "https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601"</span>
-    <br/>
-    <span>Balance: null</span>
-    <br/>
-    <span>Blockchain: Ethereum</span>
-    <br/>
-    <span>Token: False</span>
-    <br/>
-    <span>Blockchain: Binance Smart Coin </span>
-    <br/>
-    <span>Token: True</span>
-    <br/>
-    <span>Name: Ether</span>
-    <br/>
-    <br/>
-    <span>Asset: USDT</span>
-    <br/>
-    <span>Alternatives:  io.etherscan: "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0xd3cda913deb6f67967b99d67acdfa1712c293601",
-                        <br/> 
-                         io.ethplorer: "https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601", 
-                        <br/>
-                         org.etherchain: "https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601", 
-                        <br/>
-                         org.tronscan: "https://tronscan.org/#/address/0xd3cda913deb6f67967b99d67acdfa1712c293601/"</span>
-    <br/>
-    <span>Balance: null</span>
-    <br/>
-    <span>Blockchain: Ethereum</span>
-    <br/>
-    <span>Token: True</span>
-    <br/>
-    <span>Blockchain: Tron</span>
-    <br/>
-    <span>Token: True</span>
-    <br/>
-    <span>Name: Tether</span>
+  <div class="asset1">
+    <p><span style="color:black;font-weight:bold">Asset:</span> ETH</p>
+    <p><span style="color:black;font-weight:bold">Alternatives:</span>
+      <ul>
+          <li> com.bscscan: <a href="https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0xd3cda913deb6f67967b99d67acdfa1712c293601">https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0xd3cda913deb6f67967b99d67acdfa1712c293601</a>, </li>
+                      
+          <li>io.etherscan: <a href="https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601</a>, </li>
+                      
+          <li>io.ethplorer: <a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601</a>,  </li>
+                      
+          <li>org.etherchain: <a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601</a> </li>
+      </ul>
+    </p>
+
+    <p><span style="color:black;font-weight:bold">Balance:</span> null</p>
+    
+    <p>
+      <span style="color:black;font-weight:bold">Blockchain:</span> Ethereum
+      <br/>
+      <span style="color:black;font-weight:bold">Token:</span> False</span>
+    </p>
+
+      <p>
+        <span style="color:black;font-weight:bold">Blockchain:</span> Binance Smart Coin
+        <br/>
+        <span style="color:black;font-weight:bold">Token:</span> True</span>
+      </p>
+      <p><span style="color:black;font-weight:bold">Name:</span> Ether</span></p>
+  </div>
+   
+  <p></p>
+
+    <div class="asset2">
+    <p><span style="color:black;font-weight:bold">Asset:</span> USDT</p>  
+    <p><span style="color:black;font-weight:bold">Alternatives:</span>
+      <ul>
+          <li>io.etherscan: <a href="https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0xd3cda913deb6f67967b99d67acdfa1712c293601">https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0xd3cda913deb6f67967b99d67acdfa1712c293601</a>,  </li> 
+                             
+          <li>io.ethplorer: <a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601</a>, </li>
+                            
+          <li>org.etherchain: <a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601</a>, </li>
+                          
+          <li>org.tronscan: <a href="https://tronscan.org/#/address/0xd3cda913deb6f67967b99d67acdfa1712c293601/">https://tronscan.org/#/address/0xd3cda913deb6f67967b99d67acdfa1712c293601/</a>  </p> </li>
+      </ul>
+    </p>
+    
+    <p><span style="color:black;font-weight:bold">Balance:</span> null</p>
+
+    <p>
+      <span style="color:black;font-weight:bold">Blockchain:</span> Ethereum
+      <br/>
+      <span style="color:black;font-weight:bold">Token:</span> True</span>
+    </p>
+
+    <p>
+      <span style="color:black;font-weight:bold">Blockchain:</span> Tron
+      <br/>
+      <span style="color:black;font-weight:bold">Token:</span> True</span>
+    </p>
+
+    <p><span style="color:black;font-weight:bold">Name:</span> Tether</span></p>
   </div>
 
 </body>
