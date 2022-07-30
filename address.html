@@ -1,122 +1,175 @@
 <html>
 
 <head>
-  <script src="address.js" lang="javascript"></script>
-  <style>
-	.page-title { 
-	 width: 200px; 
-	 background: #ff0033; 
-	 padding: 10px;
-	 padding-right: 645px; 
-	 border: solid 1px black; 
-	 text-align:  center;
-   white-space: nowrap;
-   font-size: 150%; 
-	}
-  .address { 
-	 width: 200px; 
-	 background: #edd710; 
-	 padding: 10px;
-	 padding-right: 280px; 
-	 border: solid 1px black; 
-	 text-align:  center;
-   white-space: nowrap;
-   font-size: 0.6em;
-	}
+	<base href="/webapp/" />
 
-  .asset1 {
-    width: 220px; 
-    background: #83ee6b; 
-    padding: 10px;
-    padding-right: 370px; 
-    border: solid 1px black; 
-   }
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-   .asset2 {
-    width: 220px; 
-    background: #83ee6b; 
-    padding: 10px;
-    padding-right: 370px; 
-    border: solid 1px black;
-   }
-   .box {
-  display: inline-block;
-  vertical-align: middle;
-}
-   
-   </style> 
+	<title>Blockchain Sonar's Explorer</title>
+
+	<!-- See https://getbootstrap.com/docs/4.0/getting-started/introduction/ -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<script src="address.js" lang="javascript"></script>
+
+	<style>
+		body {
+			min-width: 780px;
+			padding: 1em;
+		}
+
+		.asset-row {
+			margin-bottom: 1em;
+		}
+
+		.blockchain-row {
+			margin-bottom: 1em;
+		}
+	</style>
 </head>
 
 <body>
-  <p><div class="page-title"><h1>Welcome to Blockchain Sonar's Explorer</h1></div></p>
-    
-  <!-- <div id="content"></div> -->
-  <div class="address"><h1>Address: 0xd3cda913deb6f67967b99d67acdfa1712c293601</h1></div>
-  <!-- <p><div class="address"><h1><span style="color:black;font-weight:bold">Address:</span> 0xd3cda913deb6f67967b99d67acdfa1712c293601</h1></div></p> -->
-  <!-- <p><span style="color:black;font-weight:bold">Address:</span> 0xd3cda913deb6f67967b99d67acdfa1712c293601</p> -->
-  
-  <p><div class="asset1">
-    <p><span style="color:black;font-weight:bold">Asset:</span> ETH</p>
-    <p><span style="color:black;font-weight:bold">Alternatives:</span>
-      <ul>
-          <li> com.bscscan: <a href="https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0xd3cda913deb6f67967b99d67acdfa1712c293601">https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0xd3cda913deb6f67967b99d67acdfa1712c293601</a>, </li>
-                      
-          <li>io.etherscan: <a href="https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601</a>, </li>
-                      
-          <li>io.ethplorer: <a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601</a>,  </li>
-                      
-          <li>org.etherchain: <a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601</a> </li>
-      </ul>
-    </p>
+	<div id="content" class="container-fluid">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="..">Address</a></li>
+				<li class="breadcrumb-item active" aria-current="page">0xd3cda913deb6f67967b99d67acdfa1712c293601</li>
+			</ol>
+		</nav>
 
-    <p><span style="color:black;font-weight:bold">Balance:</span> null</p>
-    
-    <p>
-      <span style="color:black;font-weight:bold">Blockchain:</span> Ethereum
-      <br/>
-      <span style="color:black;font-weight:bold">Token:</span> False</span>
-    </p>
+		<div class="row asset-row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<img src="icons/assets/ETH-56x56.png" />
+						<span>Ether (ETH)</span>
+					</div>
+					<div class="card-body">
+						<div class="row blockchain-row">
+							<div class="col-12">
+								<div class="card bg-light">
+									<div class="card-header">Ethereum blockchain</div>
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Balance</h5>
+														<p class="card-text">UNKNOWN</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-9">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Explorers</h5>
+														<ul class="card-text">
+															<li>
+																<a href="https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.etherscan</a>
+															</li>
+															<li>
+																<a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.ethplorer</a>
+															</li>
+															<li>
+																<a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">org.etherchain</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row blockchain-row">
+							<div class="col-12">
+								<div class="card bg-light">
+									<div class="card-header">Binance Smart Chain (Token)</div>
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Balance</h5>
+														<p class="card-text">UNKNOWN</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-9">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Explorers</h5>
+														<ul class="card-text">
+															<li>
+																<a href="https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0xd3cda913deb6f67967b99d67acdfa1712c293601">com.bscscan</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-      <p>
-        <span style="color:black;font-weight:bold">Blockchain:</span> Binance Smart Coin
-        <br/>
-        <span style="color:black;font-weight:bold">Token:</span> True</span>
-      </p>
-      <p><span style="color:black;font-weight:bold">Name:</span> Ether</span></p>
-    </p>
-  </div>
-   
-  <div class="asset2">
-    <p><span style="color:black;font-weight:bold">Asset:</span> USDT</p>  
-    <p><span style="color:black;font-weight:bold">Alternatives:</span>
-      <ul>
-          <li>io.etherscan: <a href="https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0xd3cda913deb6f67967b99d67acdfa1712c293601">https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0xd3cda913deb6f67967b99d67acdfa1712c293601</a>,  </li> 
-                             
-          <li>io.ethplorer: <a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601</a>, </li>
-                            
-          <li>org.etherchain: <a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601</a>, </li>
-                          
-          <li>org.tronscan: <a href="https://tronscan.org/#/address/0xd3cda913deb6f67967b99d67acdfa1712c293601/">https://tronscan.org/#/address/0xd3cda913deb6f67967b99d67acdfa1712c293601/</a>  </p> </li>
-      </ul>
-    </p>
-    
-    <p><span style="color:black;font-weight:bold">Balance:</span> null</p>
-
-    <p>
-      <span style="color:black;font-weight:bold">Blockchain:</span> Ethereum
-      <br/>
-      <span style="color:black;font-weight:bold">Token:</span> True</span>
-    </p>
-
-    <p>
-      <span style="color:black;font-weight:bold">Blockchain:</span> Tron
-      <br/>
-      <span style="color:black;font-weight:bold">Token:</span> True</span>
-    </p>
-
-    <p><span style="color:black;font-weight:bold">Name:</span> Tether</span></p>
-  </div>
-
+		<div class="row asset-row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-header">
+						<img src="icons/assets/USDT-56x56.png" />
+						<span>Tether (USDT)</span>
+					</div>
+					<div class="card-body">
+						<div class="row blockchain-row">
+							<div class="col-12">
+								<div class="card bg-light">
+									<div class="card-header">Ethereum blockchain (Token)</div>
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Balance</h5>
+														<p class="card-text">UNKNOWN</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-9">
+												<div class="card">
+													<div class="card-body">
+														<h5 class="card-title">Explorers</h5>
+														<ul class="card-text">
+															<li>
+																<a href="https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0xd3cda913deb6f67967b99d67acdfa1712c293601">io.etherscan</a>
+															</li>
+															<li>
+																<a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.ethplorer</a>
+															</li>
+															<li>
+																<a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">org.etherchain</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
