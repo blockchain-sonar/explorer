@@ -61,8 +61,18 @@ function buildAssetUIBlock(assetCode, balance, blockchains) {
 	const assetRowBlock = document.createElement("div");
 	assetRowBlock.classList = "row asset-row";
 
+	const assetRowColBlock = document.createElement("div");
+	assetRowColBlock.classList = "col-12";
+	assetRowBlock.appendChild(assetRowColBlock);
+
+	const assetCardBlock = document.createElement("div");
+	assetCardBlock.classList = "card";
+	assetRowColBlock.appendChild(assetCardBlock);
+
+
 	// TODO: Implement block
-	assetRowBlock.innerText = "TODO: Implement block";
+	assetCardBlock.innerText = "TODO: Implement block";
+
 
 	return assetRowBlock;
 }
