@@ -1,4 +1,4 @@
-# Backend of blockchain sonar
+# Blockchain Sonar's Explorer Backend
 ## Quick Start
 * Launch backend
 ```shell
