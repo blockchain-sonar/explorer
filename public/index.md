@@ -7,10 +7,10 @@
 
 ### Production
 
-* **Production Web Application:** [www.blockchain-sonar.com/explorer](https://www.blockchain-sonar.com/explorer)
+* **Production Web Application:** [https://explorer.blockchain-sonar.com](https://explorer.blockchain-sonar.com)
 * **Production API:** [https://api.blockchain-sonar.com/explorer](https://api.blockchain-sonar.com/explorer)
 
 ### Test
 
-* **Test Web Application:** [www.blockchain-sonar-test.com/explorer](https://www.blockchain-sonar-test.com/explorer)
+* **Test Web Application:** [https://explorer.blockchain-sonar-test.com](https://explorer.blockchain-sonar-test.com)
 * **Test API:** [https://api.blockchain-sonar-test.com/explorer](https://api.blockchain-sonar-test.com/explorer)
