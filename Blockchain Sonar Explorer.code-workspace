@@ -4,7 +4,10 @@
 			"path": "docs"
 		},
 		{
-			"path": "backend"
+			"path": "backend-dart"
+		},
+		{
+			"path": "backend-python"
 		},
 		{
 			"path": "frontend"

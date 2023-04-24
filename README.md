@@ -20,9 +20,20 @@ Branches (sub-projects):
 	```
 1. Initialize [worktree](https://git-scm.com/docs/git-worktree) by execute following commands
 	```shell
-	for BRANCH in backend docs frontend; do git worktree add "${BRANCH}" "${BRANCH}"; done
+	for BRANCH in backend-python backend-dart docs frontend; do git worktree add "${BRANCH}" "${BRANCH}"; done
 	```
 1. Open VSCode Workspace
 	```shell
 	code "Blockchain Sonar Explorer.code-workspace" 
 	```
+
+## Notes
+
+Add new orphan branch
+
+```shell
+NEW_ORPHAN_BRANCH=mybranch
+git switch --orphan  "${NEW_ORPHAN_BRANCH}"
+git commit --allow-empty -m "Initial Commit"
+git push origin "${NEW_ORPHAN_BRANCH}"
+```
