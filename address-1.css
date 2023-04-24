@@ -7,7 +7,7 @@
     display: grid;
     /* same as margin is not masony card */
     gap: 2px;
-    grid-template-columns: repeat(auto-fill, 150px);
+    grid-template-columns: repeat(auto-fill, 300px);
     grid-template-rows: masonry;
     justify-content: center;
   }
@@ -29,18 +29,53 @@
   }
 }
 
-.header{
-	width: 500px;
-	height: 40px;
-	border: solid;
+.header {
+  width: 500px;
+  height: 50px;
+  border: solid;
+  font-size: larger;
+  border-radius: 10px;
+  margin-left: 50px;
+  text-align: center;
+  padding-top: 10px;
+  /* margin-right: auto; */
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.footer {
+  display: inline-block;
+  position: block;
+  width: 100%;
+  height: auto;
+  left: 0;
+  bottom: 0;
+  border-top: solid lightgrey;
+  display: inline-block;
+  /* background-color: grey; */
+}
+.support {
+  float: left;
+  display: block;
+}
+
+.developers {
+	padding-left: 20px;
+  float: left;
+  display: block;
 }
 
 .card-host {
+  margin-bottom: 20px;
   /* background: rgb(200, 0, 255); */
 }
 
+.address_red {
+  color: red;
+}
+
 .card {
-  width: 150px;
+  width: 300px;
 }
 .card-content {
   /* margin-right: 20px; */
@@ -49,9 +84,9 @@
   display: inline-block;
   text-align: center;
 }
-ul{
-	/* background-color: azure; */
-	padding-left: 15px;
+ul {
+  /* background-color: azure; */
+  padding-left: 15px;
 }
 
 .currency-name {
