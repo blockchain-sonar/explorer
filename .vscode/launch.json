@@ -6,7 +6,7 @@
 	"configurations": [
 		{
 			// See for Flask Tutorial in Visual Studio Code: https://code.visualstudio.com/docs/python/tutorial-flask
-			"name": "Backend App",
+			"name": "Backend Python",
 			"type": "python",
 			"request": "launch",
 			"cwd": "${workspaceFolder}",
