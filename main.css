@@ -1,0 +1,16 @@
+body {
+	font-family: "Montserrat", sans-serif;
+	background: lightgray;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	overflow: scroll;
+  }
+  html,
+  body {
+	width: 100vw;
+	height: 100vh;
+	padding: 0;
+	margin: 0;
+  }
