@@ -3,15 +3,20 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0 maximum-scale=1.0" />
-	<link href="address-1.css" rel="stylesheet" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0 maximum-scale=1.0"/>
+	<link href="/address-1.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link href="/main.css" rel="stylesheet"/>
+	<link rel="icon" type="image/x-icon" href="/icons/assets/logo_icon.png">
 	<title>Address</title>
 </head>
 
 <header>
 	<div class="header">
-		<span class="address_red">Address /</span> 0xd3cda913deb6f67967b99d67acdfa1712c293601
+		{{# address }}
+		<span class="address_red">Address /</span> {{address}}
+		{{/ address }}
 	</div>
 </header>
 
@@ -19,171 +24,70 @@
 	<div class="card-host">
 		<!-- addresses -->
 		<!-- <div class="card-sizer"></div> -->
-		<div class="card currency-1">
-			<div class="currency-name">Ether</div>
+
+		{{# assets }}
+		{{# blockchains }}
+		<!-- <div class="card">{{ id }} {{ blockchains }} </div> -->
+
+		<div class="card currency-card">
 			<div class="card-content">
-				<img src="icons/assets/ETH-56x56.png" />
-				<div class="currency-explorer">Ethereum............... </div>
+				<img src="/icons/assets/ETH-56x56.png" />
+				<div class="currency-name">{{ id }}</div>
+				<div class="currency-explorer">{{ name }} </div>
 			</div>
 			<ul>
+
 				<li>
-					<a href="https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.etherscan</a>
+					Blockchain: {{ blockchain }}
 				</li>
+
+			</ul>
+			{{ #alternatives }}
+			<ul class="circle-blockchain">
 				<li>
-					<a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.ethplorer</a>
-				</li>
-				<li>
-					<a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">org.etherchain</a>
+					<a href={{ link }}>{{ name }}</a>
 				</li>
 			</ul>
-			<span>Balance: 0,000345</span>
+			{{ /alternatives }}
+
+			<div>Token: {{ token }}</div>
+			<span>Balance: {{ balance }}</span>
 		</div>
-		<div class="card currency-2">
-			<div class="currency-name">Ether</div>
-			<div class="card-content">
-				<img src="icons/assets/ETH-56x56.png" />
-				<div class="currency-explorer">Binance Smart Chain (Token)</div>
-			</div>
-			<ul>
-				<li>
-					<a href="https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0xd3cda913deb6f67967b99d67acdfa1712c293601">com.bscscan</a>
-				</li>
-			</ul>
-			<span>Balance: 0,000754</span>
-		</div>
-		<div class="card currency-3">
-			<div class="currency-name">USDT</div>
-			<div class="card-content">
-				<img src="icons/assets/USDT-56x56.png" />
-				<div class="currency-explorer">Ethereum (Token)</div>
-			</div>
-			<ul>
-				<li>
-					<a href="https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.etherscan</a>
-				</li>
-				<li>
-					<a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.ethplorer</a>
-				</li>
-				<li>
-					<a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">org.etherchain</a>
-				</li>
-			</ul>
-			<span>Balance: 0,000123307</span>
-		</div>
-		<div class="card currency-4">
-			<div class="currency-name">MATIC</div>
-			<div class="card-content">
-				<img src="icons/assets/MATIC-56x56.png" />
-				<div class="currency-explorer">Ethereum (Token)</div>
-			</div>
-			<ul>
-				<li>
-					<a href="https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.etherscan</a>
-				</li>
-				<li>
-					<a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.ethplorer</a>
-				</li>
-				<li>
-					<a href="https://etherchain.org/account/0xd3cda913deb6f67967b99d67acdfa1712c293601">org.etherchain</a>
-				</li>
-				<li>
-					<a href="https://blockchair.com/ethereum/erc-20/token/0xd3CdA913deB6f67967B99D67aCDFa1712C293601">com.blockchain</a>
-				</li>
-			</ul>
-			<span>Balance: 5,07890203</span>
-		</div>
-		<div class="card currency-5">
-			<div class="currency-name">MATIC</div>
-			<div class="card-content">
-				<img src="icons/assets/MATIC-56x56.png" />
-				<div class="currency-explorer">Polygon...............</div>
-			</div>
-			<ul>
-				<li>
-					<a href="https://etherscan.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.etherscan</a>
-				</li>
-				<li>
-					<a href="https://ethplorer.io/address/0xd3cda913deb6f67967b99d67acdfa1712c293601">io.ethplorer</a>
-				</li>
-			</ul>
-			<span>Balance: 16,389023</span>
-		</div>
-		<div class="card currency-6">
-			<div class="currency-name">BUSD-T</div>
-			<div class="card-content">
-				<img src="icons/assets/BUSD-T-56x56.png" />
-				<div class="currency-explorer">Binance Smart Chain (Token)</div>
-			</div>
-			<ul>
-				<li>
-					<a href="https://bscscan.com/token/0x2170ed0880ac9a755fd29b2688956bd959f933f8?a=0xd3cda913deb6f67967b99d67acdfa1712c293601">com.bscscan</a>
-				</li>
-			</ul>
-			<span>Balance: 3,070754</span>
-		</div>
-		<div class="card currency-7">
-			text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-		</div>
-		<div class="card currency-8">
-			The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-		</div>
-		<div class="card currency-9">
-			humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-		</div>
-		<div class="card currency-10">
-			Lorem ipsum was conceived as filler text, formatted in a certain way to enable the presentation of graphic elements in documents, without the need for formal copy. Using Lorem Ipsum allows designers to put together layouts and the form of the content before the content has been created, giving the design and production process more freedom.
-		</div>
-		<div class="card currency-11">
-			It is widely believed that the history of Lorem Ipsum originates with Cicero in the 1st Century BC and his text De Finibus bonorum et malorum. This philosophical work, also known as On the Ends of Good and Evil, was split into five books. The Lorem Ipsum we know today is derived from parts of the first book Liber Primus and its discussion on hedonism, the words of which had been altered, added and removed to make it nonsensical and improper Latin. It is not known exactly when the text gained its current traditional form. However references to the phrase "lorem ipsum" can be found in the 1914 Loeb Classical Library Edition of the De
-		</div>
-		<div class="card currency-12">
-			"Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but occasionally circumstances occur in which toil and pain can procure him some great pleasure".
-		</div>
-		<div class="card currency-13">
-			Advancing to the 1960s, Lorem Ipsum was made popular by typeface manufacturer Letraset, who used it in their advertising campaigns. Letraset offered pages of Lorem Ipsum as rub down transfer sheets, which were widely used in the pre-computer era for layouts. These transfer pages, known as Letraset Body Type, were featured in the company's advertising and their popular catalogue.
-		</div>
-		<div class="card currency-14">
-			Lorem Ipsum was reintroduced in the 1980s by the Aldus Corporation, a company that developed Desktop Publishing Software. Their most well known product PageMaker came with pre-installed graphics and word-processing templates containing a version of the faux latin language.
-		</div>
-		<div class="card currency-15">
-			professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-		</div>
-		<div class="card currency-16">
-			The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-		</div>
-		<div class="card currency-17">
-			of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-		</div>
-		<div class="card currency-18">
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-		</div>
+		{{/ blockchains }}
+		{{/ assets }}
 	</div>
 
 	<footer>
 		<div class="footer"></div>
 		<div class="support">
 			<span>Support</span>
-			<ul>
-				<li>
-					<a href="https://">Product help</a>
-				<li>
-					<a href="https://">Report an issue</a>
-				</li>
-			</ul>
+			<dl>
+				<dt>
+					<a class="footer-link" href="https://">Product help</a>
+				<dt>
+					<a class="footer-link" href="https://">Report an issue</a>
+				</dt>
+			</dl>
 		</div>
 		<div class="developers">
-		<span>Developers</span>
-		<ul>
-			<li>
-				<a href="https://">Web technologies</a>
-			<li>
-				<a href="https://">Learn Web Development</a>
-			</li>
-			<li>
-				<a href="https://">MDN Plus</a>
-			</li>
-		</ul>
-	</div>
+			<span>Developers</span>
+			<dl>
+				<dt>
+					<a class="footer-link" href="https://">Web technologies</a>
+				<dt>
+					<a class="footer-link" href="https://">Learn Web Development</a>
+				</dt>
+				<dt>
+					<a class="footer-link" href="https://">MDN Plus</a>
+				</dt>
+			</dl>
+		</div>
+		<div class="donations">
+			<p class="donate-text">Donations:
+				<a class="donate-link" href="https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7?a=0x2b6828f4f227953fb36f42bda830b457afdc1c5e">currency_address</a>
+				<i class=" donate-icon fa fa-heart fa-fw"></i>
+			</p>
+		</div>
 
 	</footer>
 

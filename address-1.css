@@ -30,17 +30,20 @@
 }
 
 .header {
-  width: 500px;
+  width: 100%;
   height: 50px;
-  border: solid;
+  background: white;
+  /* border: solid; */
   font-size: larger;
-  border-radius: 10px;
-  margin-left: 50px;
+  /* border-radius: 10px; */
   text-align: center;
-  padding-top: 10px;
-  /* margin-right: auto; */
+  padding-top: 15px;
   margin-top: 20px;
   margin-bottom: 30px;
+}
+
+.address_red {
+  color: red;
 }
 
 .footer {
@@ -50,9 +53,9 @@
   height: auto;
   left: 0;
   bottom: 0;
-  border-top: solid lightgrey;
+  border-top: solid rgb(18, 17, 17);
   display: inline-block;
-  /* background-color: grey; */
+  background: grey;
 }
 .support {
   float: left;
@@ -60,9 +63,23 @@
 }
 
 .developers {
-	padding-left: 20px;
+  padding-left: 20px;
   float: left;
   display: block;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: gray;
+}
+
+.donations {
+  margin: 3%;
+  margin-top: 50px;
+  position: absolute;
+  right: 0;
+  color: grey;
+  text-decoration: none;
 }
 
 .card-host {
@@ -70,7 +87,18 @@
   /* background: rgb(200, 0, 255); */
 }
 
-.address_red {
+.donate-link {
+  text-decoration: none;
+  color: rgb(116, 206, 235);
+}
+
+.donate-link:hover {
+  color: red;
+}
+
+.donate-icon {
+  content: "\f004"; /* добавляем иконку дом */
+  font-family: FontAwesome;
   color: red;
 }
 
@@ -89,107 +117,20 @@ ul {
   padding-left: 15px;
 }
 
+.circle-blockchain {
+  list-style-type: circle;
+}
+
 .currency-name {
   display: inline-block;
   text-align: center;
 }
 
-.currency-1 {
+.currency-card {
   /* height: 200px; */
   /* background-color: red; */
+  border-radius: 15px;
   border: solid;
   padding: 5px;
-}
-
-.currency-2 {
-  /* height: 200px; */
-  /* background-color: aqua; */
-  padding: 5px;
-  border: solid;
-}
-
-.currency-3 {
-  /* height: 100px; */
-  /* background-color: aquamarine; */
-  padding: 5px;
-  border: solid;
-}
-.currency-4 {
-  /* height: 200px; */
-  /* background-color: white; */
-  padding: 5px;
-  border: solid;
-}
-
-.currency-5 {
-  /* height: 180px; */
-  /* background-color: rgb(178, 178, 232); */
-  padding: 5px;
-  border: solid;
-}
-
-.currency-6 {
-  /* height: 250px; */
-  /* background-color: blueviolet; */
-  padding: 5px;
-  border: solid;
-}
-
-.currency-7 {
-  /* height: 420px; */
-  background-color: brown;
-}
-
-.currency-8 {
-  /* height: 150px; */
-  background-color: burlywood;
-}
-
-.currency-9 {
-  /* height: 320px; */
-  background-color: cadetblue;
-}
-
-.currency-10 {
-  /* height: 390px; */
-  background-color: green;
-}
-
-.currency-11 {
-  /* height: 200px; */
-  background-color: greenyellow;
-}
-
-.currency-12 {
-  /* height: 310px; */
-  background-color: yellow;
-}
-
-.currency-13 {
-  /* height: 400px; */
-  background-color: violet;
-}
-
-.currency-14 {
-  /* height: 230px; */
-  background-color: chocolate;
-}
-.currency-15 {
-  /* height: 280px; */
-  background-color: cornflowerblue;
-}
-
-.currency-16 {
-  /* height: 380px; */
-  background-color: crimson;
-}
-
-.currency-17 {
-  /* height: 290px; */
-  background-color: darkblue;
-}
-
-.currency-18 {
-  /* height: 190px; */
-  background-color: dodgerblue;
+  background: white;
 }
