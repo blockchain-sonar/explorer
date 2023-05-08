@@ -10,6 +10,12 @@
             "type": "dart",
             "program": "bin/server.dart",
             "cwd": "${workspaceFolder}"
+        },{
+            "name": "Test",
+            "request": "launch",
+            "type": "dart",
+            "cwd": "${workspaceFolder}",
+            "program": "bin/address.dart"
         }
     ]
 }
