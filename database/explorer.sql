@@ -1,4 +1,4 @@
 CREATE TABLE explorer (
     id BIGINT PRIMARY KEY,
-    explorer CHARACTER VARYING(100)
+    explorer_id CHARACTER VARYING(100)
 );

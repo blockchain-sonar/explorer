@@ -1,4 +1,4 @@
 CREATE TABLE blockchain (
     id BIGINT PRIMARY KEY,
-    blockchain CHARACTER VARYING(100)
+    blockchain_id CHARACTER VARYING(100)
 );
