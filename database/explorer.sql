@@ -1,4 +1,4 @@
-CREATE TABLE explorer (
-    id BIGINT PRIMARY KEY,
-    explorer_id CHARACTER VARYING(100)
+CREATE TABLE "explorer" (
+    "id"        BIGINT PRIMARY KEY NOT NULL,
+    "explorer"  CHARACTER VARYING(100)
 );
