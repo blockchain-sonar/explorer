@@ -5,4 +5,3 @@ CREATE TABLE "blockchain" (
     "name"  CHARACTER VARYING(100)  NOT NULL
 );
 
--- ALTER TABLE "blockchain" ALTER COLUMN "id" SET DEFAULT NEXTVAL('blockchain_id_seq');
