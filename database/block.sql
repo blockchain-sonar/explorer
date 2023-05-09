@@ -1,7 +1,7 @@
 CREATE SEQUENCE "block_id_seq" START 1;
 
 CREATE TABLE "block" (
-    "id"            BIGINT PRIMARY KEY  NOT NULL    DEFAULT NEXTVAL('blockchain_id_seq'),
+    "id"            BIGINT PRIMARY KEY  NOT NULL    DEFAULT NEXTVAL('block_id_seq'),
     "number"        BIGINT              NOT NULL,
     "hash"          BYTEA               NOT NULL,
     "parent_hash"   BYTEA               NOT NULL,
